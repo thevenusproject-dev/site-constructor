@@ -1,3 +1,4 @@
+<?php
 /* gets url content */
 function get_curl_content($url) {
 	$ch = curl_init();
@@ -8,3 +9,4 @@ function get_curl_content($url) {
 	curl_close($ch);
 	return $content;
 }
+?>
