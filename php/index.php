@@ -37,6 +37,7 @@ else $content = file_get_contents(CONTENT_DIR .'404' . $file_format);
 <!DOCTYPE html>
 <html>
 	<head>
+	<link rel="icon" type="image/x-icon" href="favicon.png">
 		<title><?php echo ucwords(strtolower($url)); ?></title>
 	</head>
 		<xmp theme="<?php echo $theme; ?>" style="display:none;">
