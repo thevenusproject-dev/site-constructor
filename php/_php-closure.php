@@ -48,7 +48,7 @@ class PhpClosure {
   var $_warning_level = "DEFAULT";
   var $_use_closure_library = false;
   var $_pretty_print = false;
-  var $_debug = true;
+  var $_debug = false;
   var $_cache_dir = "";
   var $_code_url_prefix = "";
 
@@ -60,6 +60,13 @@ class PhpClosure {
    */
   function add($file) {
     $this->_srcs[] = $file;
+    return $this;
+  }
+  
+  function add_array($files) {
+	foreach ($files as $file) {
+		$this->_srcs[] = $file;
+	}
     return $this;
   }
 
@@ -200,6 +207,7 @@ class PhpClosure {
       $cache_file = $this->_getCacheFileName();
       if ($this->_isRecompileNeeded($cache_file)) {
         $result = $this->_compile();
+		if (!file_exists($this->_cache_dir)) mkdir ($this->_cache_dir, 0744);
         file_put_contents($cache_file, $result);
         echo $result;
       } else {
@@ -213,7 +221,8 @@ class PhpClosure {
           header("HTTP/1.1 304 Not Modified"); 
         } else {
           // Read the cache file and send it to the client.
-          echo file_get_contents($cache_file);
+          $get_file = builder_curl_get($cache_file);
+		  echo $get_file['content'];
         }
       }
     }
@@ -224,18 +233,6 @@ class PhpClosure {
   function _isRecompileNeeded($cache_file) {
     // If there is no cache file, we obviously need to recompile.
     if (!file_exists($cache_file)) return true;
-
-    $cache_mtime = filemtime($cache_file);
-
-    // If the source files are newer than the cache file, recompile.
-    foreach ($this->_srcs as $src) {
-      if (filemtime($src) > $cache_mtime) return true;
-    }
-
-    // If this script calling the compiler is newer than the cache file,
-    // recompile.  Note, this might not be accurate if the file doing the
-    // compilation is loaded via an include().
-    if (filemtime($_SERVER["SCRIPT_FILENAME"]) > $cache_mtime) return true;
 
     // Cache is up to date.
     return false;
@@ -348,7 +345,8 @@ class PhpClosure {
   function _readSources() {
     $code = "";
     foreach ($this->_srcs as $src) {
-      $code .= file_get_contents($src) . "\n\n";
+	  $get_file_src = builder_curl_get($src);
+      $code .= $get_file_src['content'] . "\n\n";
     }
     return $code;
   }

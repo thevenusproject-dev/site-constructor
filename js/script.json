@@ -2,12 +2,20 @@
 "scripts": 
 	[
 	{
+  		"link": "http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js",
+		"desc": "The purpose of jQuery is to make it much easier to use JavaScript on your website."
+	},
+	{
 		"link": "https://raw.githubusercontent.com/chjj/marked/master/lib/marked.js",
 		"desc": "A full-featured markdown parser and compiler, written in JavaScript. Needed for page generation from GitHub"
 	},
 	{
   		"link": "http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js",
 		"desc": "Syntax Highlight"
-	}
+	},
+	{
+		"link": "https://raw.githubusercontent.com/garand/sticky/master/jquery.sticky.js",
+		"desc": "A full-featured markdown parser and compiler, written in JavaScript. Needed for page generation from GitHub"
+	},
 	]
 }
