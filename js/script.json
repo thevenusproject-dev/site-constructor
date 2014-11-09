@@ -24,6 +24,10 @@
 	{
 		"link": "https://raw.githubusercontent.com/mattbryson/TouchSwipe-Jquery-Plugin/master/jquery.touchSwipe.min.js",
 		"desc": "TouchSwipe is a jquery plugin to be used with jQuery on touch input devices such as iPad, iPhone etc."
+	},
+	{
+		"link": "https://raw.githubusercontent.com/gilbitron/carouFredSel/master/jquery.carouFredSel-6.2.1-packed.js",
+		"desc": "A circular, responsive carousel plugin built using the jQuery."
 	}
 	]
 }
