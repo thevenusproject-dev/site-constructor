@@ -207,9 +207,9 @@ class PhpClosure {
         $result = $this->_compile();
 		if (!file_exists($this->_cache_dir)) mkdir ($this->_cache_dir, 0744);
         file_put_contents($cache_file, $result);
-        echo $cache_file.' created succesfully!';
+        echo '[PhpClosure] '.$cache_file.' created succesfully!<br />';
       } else {
-        echo $cache_file.' is already existing. No recompile is needed.';
+        echo '[PhpClosure] '.$cache_file.' is already existing. No recompile is needed.<br />';
       }
     }
   }
