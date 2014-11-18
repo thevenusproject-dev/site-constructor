@@ -9,7 +9,7 @@ define('ROOT_DIR', realpath(dirname(__FILE__)) .'/');
 define('CONTENT_DIR', ROOT_DIR .'content/');
 
 // Options
-$script_location = "assets/script.js";
+$script_location = "/assets/script.js";
 $theme = "venus";
 $file_format = ".md";
 

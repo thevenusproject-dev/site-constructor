@@ -197,33 +197,19 @@ class PhpClosure {
    * invoking a recompile, if necessary.
    */
   function write() {
-    header("Content-Type: text/javascript");
 
-    // No cache directory so just dump the output.
+  // No cache directory so just dump the output.
     if ($this->_cache_dir == "") {
       echo $this->_compile();
-
     } else {
       $cache_file = $this->_getCacheFileName();
       if ($this->_isRecompileNeeded($cache_file)) {
         $result = $this->_compile();
 		if (!file_exists($this->_cache_dir)) mkdir ($this->_cache_dir, 0744);
         file_put_contents($cache_file, $result);
-        echo $result;
+        echo $cache_file.' created succesfully!';
       } else {
-        // No recompile needed, but see if we can send a 304 to the browser.
-        $cache_mtime = filemtime($cache_file);
-        $etag = md5_file($cache_file);
-        header("Last-Modified: ".gmdate("D, d M Y H:i:s", $cache_mtime)." GMT"); 
-        header("Etag: $etag"); 
-        if (@strtotime(@$_SERVER['HTTP_IF_MODIFIED_SINCE']) == $cache_mtime || 
-            @trim(@$_SERVER['HTTP_IF_NONE_MATCH']) == $etag) { 
-          header("HTTP/1.1 304 Not Modified"); 
-        } else {
-          // Read the cache file and send it to the client.
-          $get_file = builder_curl_get($cache_file);
-		  echo $get_file['content'];
-        }
+        echo $cache_file.' is already existing. No recompile is needed.';
       }
     }
   }

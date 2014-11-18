@@ -15,7 +15,7 @@
 	},
 	{
 		"link": "https://raw.githubusercontent.com/garand/sticky/master/jquery.sticky.js",
-		"desc": "A full-featured markdown parser and compiler, written in JavaScript. Needed for page generation from GitHub"
+		"desc": "Sticky is a jQuery plugin that gives you the ability to make any element on your page always stay visible."
 	},
 	{
 		"link": "https://raw.githubusercontent.com/jquery/jquery-mousewheel/master/jquery.mousewheel.min.js",
