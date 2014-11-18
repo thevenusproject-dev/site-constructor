@@ -1,0 +1,17 @@
+{
+"styles": 
+	[
+	{
+  		"link": "https://raw.githubusercontent.com/thevenusproject-dev/site-constructor/master/css/reset.css",
+		"desc": "http://www.cssreset.com/what-is-a-css-reset/"
+	},
+	{
+		"link": "https://raw.githubusercontent.com/thevenusproject-dev/site-constructor/master/css/grid.css",
+		"desc": "Grid system"
+	},
+	{
+  		"link": "https://raw.githubusercontent.com/thevenusproject-dev/site-constructor/master/css/prettify.css",
+		"desc": "Pretty printing styles. Used with prettify.js. http://google-code-prettify.googlecode.com"
+	}
+	]
+}

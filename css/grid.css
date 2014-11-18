@@ -1,0 +1,135 @@
+.container
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 960px;
+}
+.one,
+.one-third,
+.two-third,
+.one-half,
+.column-510,
+.column-560,
+.column-340 
+{
+	position: relative;
+	float: left;
+	margin-left: 0px;
+	margin-right: 60px;
+}
+.last
+{
+    margin-right: 0 !important;
+}
+.one 
+{
+	width: 960px;
+	margin-right: 0px !important;
+}
+.one-third
+{
+	width: 280px;
+}
+.two-third
+{
+	width: 620px;
+}
+.one-half
+{
+	width: 450px;
+}
+.column-510
+{
+	width: 510px;
+}
+.column-560
+{
+	width: 560px;
+}
+.column-340
+{
+	width: 340px;
+}
+.clear {
+	clear: both;
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+.clearfix:before,
+.clearfix:after {
+	content: "\0020";
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+.clearfix:after {
+	clear: both;
+}
+.clearfix {
+	zoom: 1;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 959px) 
+{
+	.one,
+	.one-third,
+	.two-third,
+	.one-half,
+	.column-510,
+	.column-560,
+	.column-340	{margin-right: 45px;}
+	
+	.container	{width: 720px;}
+	.container .one         {width: 720px;}
+	.container .one-third   {width: 210px;}
+	.container .two-third   {width: 465px;} 
+	.container .one-half    {width: 337px;}
+	.container .column-510  {width: 382px;}
+	.container .column-560  {width: 420px;}
+	.container .column-340  {width: 255px;}
+}
+
+@media only screen and (max-width: 767px) 
+{
+	.one,
+	.one-third,
+	.two-third,
+	.one-half,
+	.column-510,
+	.column-560,
+	.column-340	{margin-right: 0px;}
+	
+	.container	{width: 300px;}
+	.container .one,
+	.container .one-third,
+	.container .two-third,
+	.container .one-half, 
+	.container .column-510,
+	.container .column-560, 
+	.container .column-340 {width: 300px;}
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) 
+{
+	.one,
+	.one-third,
+	.two-third,
+	.one-half,
+	.column-510,
+	.column-560,
+	.column-340	{margin-right: 0px;}
+	
+	.container	{width: 420px;}
+	.container .one,
+	.container .one-third,
+	.container .two-third,
+	.container .one-half,
+	.container .column-510,
+	.container .column-560, 
+	.container .column-340 {width: 420px;}
+}
