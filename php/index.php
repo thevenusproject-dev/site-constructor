@@ -8,6 +8,9 @@ Generated from: https://github.com/thevenusproject-dev
 define('ROOT_DIR', realpath(dirname(__FILE__)) .'/');
 define('CONTENT_DIR', ROOT_DIR .'content/');
 
+// Functions include
+include('php/_functions.php');
+
 // Options
 $script_location = "##JSLOCATION##";
 $theme = "venus";
@@ -32,12 +35,11 @@ else $file .= $file_format;
 if(file_exists($file)) $content = file_get_contents($file);
 else $content = file_get_contents(CONTENT_DIR .'404' . $file_format);
 
-// Template
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
-	<link rel="icon" type="image/x-icon" href="favicon.png">
+	<link rel="icon" type="image/x-icon" href="##FAVICONSRC##">
 		<title><?php echo ucwords(strtolower($url)); ?></title>
 	</head>
 		<xmp theme="<?php echo $theme; ?>" style="display:none;">
