@@ -63,8 +63,10 @@ function builder_curl_get($url, $is_json=0, $data='') {
 
 /* ----------------------------------- BUILD PROCESS [PARSE] ----------------------------------- */
 
-// Starting the timer =)
+// Starting the timer, setting the date =)
 $time_start = microtime(true);
+$date = date_create();
+$timestamp = date_timestamp_get($date);
 
 // Grab js files from the list
 $js_files = builder_curl_get($site_constructor_repo.'/contents/js', 1);
@@ -159,13 +161,15 @@ file_put_contents('.htaccess', $htaccess_contents);
 
 // Now to process our main index.php file
 // We need to change some parts of index.php file in order to match our current environment
+$js_cache_filename = str_replace('.js','_'.$timestamp.'.js',$c->_getCacheFileName());
+
 $varholders = array(
 	'##JSLOCATION##',
 	'##FAVICONSRC##'
 );
 
 $actual_vars = array(
-	$c->_getCacheFileName(),
+	$js_cache_filename,
 	$favicon_src
 );
 
@@ -186,6 +190,4 @@ foreach ($db_backup['content'] as $lang_branch) {
 }
 
 // Finally, rewrite build.php filename to prevent other users from manual execution. This is not so necessary to do, cause I think there will be only one main site - but who knows how the things can be turned?
-$date = date_create();
-$timestamp = date_timestamp_get($date);
 //rename('build.php', 'build_'.$timestamp.'.php');
