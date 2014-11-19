@@ -11,16 +11,22 @@ For other questions use official TVP TeamSpeak server.
 /* ----------------------------------- OPTIONS & FUNCTIONS -----------------------------------*/
 
 // Assigning links to grab files from
-$site_constructor_repo = 'https://api.github.com/repos/thevenusproject-dev/site-constructor';
-$database_repo = 'https://api.github.com/repos/thevenusproject-dev/database';
+$raw_github = 'https://raw.githubusercontent.com';
+$api_github = 'https://api.github.com';
+$site_constructor_repo = $api_github.'/repos/thevenusproject-dev/site-constructor';
+$database_repo = $api_github.'/repos/thevenusproject-dev/database';
+$database_branches = $api_github.'/repos/thevenusproject-dev/database/branches';
 $site_zip = 'https://github.com/thevenusproject-dev/site-constructor/archive/master.zip';
-$database_branches = 'https://api.github.com/repos/thevenusproject-dev/database/branches';
 
 // Necessary function to parse pages
-function builder_curl_get($url, $is_json=0) {
+function builder_curl_get($url, $is_json=0, $data='') {
   $uagent = "The Venus Project Crawler/1.0 (http://thevenusproject.com)";
   $ch = curl_init( $url );
 
+  if (!empty($data)) {
+  curl_setopt($ch, CURLOPT_POST, 1);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+  }
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
   curl_setopt($ch, CURLOPT_ENCODING, "");     
@@ -66,9 +72,9 @@ $js_files = builder_curl_get($site_constructor_repo.'/contents/js', 1);
 foreach ($js_files['content'] as $js_file) {
 	
 	if (strpos($js_file->path, '.json') === false) {
-		$js_raw = builder_curl_get('https://raw.githubusercontent.com/thevenusproject-dev/site-constructor/master/'.$js_file->path);
+		$js_additional_files_array[] = $raw_github.'/thevenusproject-dev/site-constructor/master/'.$js_file->path;
 	} else {
-		$js_raw = builder_curl_get('https://raw.githubusercontent.com/thevenusproject-dev/site-constructor/master/'.$js_file->path, 1);
+		$js_raw = builder_curl_get($raw_github.'/thevenusproject-dev/site-constructor/master/'.$js_file->path, 1);
 		foreach ($js_raw['content']->scripts as $js_script_info) {
 			$js_files_array[] = $js_script_info->link;
 		}
@@ -83,7 +89,7 @@ $db_backup = builder_curl_get($database_branches, 1);
 $php_files = builder_curl_get($site_constructor_repo.'/contents/php', 1);
 
 foreach ($php_files['content'] as $php_file) {
-	$php_raw = builder_curl_get('https://raw.githubusercontent.com/thevenusproject-dev/site-constructor/master/'.$php_file->path);
+	$php_raw = builder_curl_get($raw_github.'/thevenusproject-dev/site-constructor/master/'.$php_file->path);
 	
 	$dir = 'php';
 	if (!file_exists($dir)) mkdir ($dir, 0744);
@@ -100,25 +106,58 @@ foreach ($php_files['content'] as $php_file) {
 	}
 }
 
-// Now we have all the needed files included. Let's start to gather GitHub files and build our visual part :)
-/* ------------------------------ BUILD PROCESS [VISUAL PREPARE] ------------------------------- */
+// Get our CSS files and minify them using regexp
+$css_files = builder_curl_get($raw_github.'/thevenusproject-dev/site-constructor/master/css/css.json', 1);
 
+foreach ($css_files['content']->styles as $css_file) {
+	$css_files_array[] = $css_file->link;
+}
+
+foreach ($css_files_array as $css_file_link) {
+	$css = builder_curl_get($css_file_link);
+	$css_buffer .= $css['content'];
+}
+
+// Now we have all the needed files included. Let's start to gather GitHub files and after that build our visual part :)
 // Let's use our PHP wrapper for the Google Closure JS Compiler web service (https://developers.google.com/closure/compiler/) to compile all the needed JS files into one.
-$js_files_array = array('http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js','https://raw.githubusercontent.com/chjj/marked/master/lib/marked.js');
+$js_files = array_merge($js_files_array,$js_additional_files_array);
+
 $c = new PhpClosure();
-$c->add_array($js_files_array)
+$c->add_array($js_files)
   ->cacheDir("js/")
   ->write();
 
+// CSS prepare: remove comments, space after colons, whitespace & combine everything into one file
+$css_buffer = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css_buffer);
+$css_buffer = str_replace(': ', ':', $css_buffer);
+$css_buffer = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $css_buffer);
 
-// Now to prepare CSS files
+$dir = 'css';
+if (!file_exists($dir)) mkdir ($dir, 0744);
+file_put_contents($dir.'/style.min.css', $css_buffer);
 
 // Favicon?
-$favicon_url = builder_curl_get('https://raw.githubusercontent.com/thevenusproject-dev/site-constructor/master/favicon.png');
+$favicon_url = builder_curl_get($raw_github.'/thevenusproject-dev/site-constructor/master/favicon.png');
 $favicon_data = base64_encode($favicon_url['content']);
 $favicon_src = 'data:image/png;base64,'.$favicon_data;
 
-// Now to prepare our main index.php file
+// .htaccess
+$htaccess_contents = 
+'<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteRule . index.php [L]
+</IfModule>
+
+# Prevent file browsing
+Options -Indexes';
+
+file_put_contents('.htaccess', $htaccess_contents);
+
+/* ------------------------------ BUILD PROCESS [VISUAL PREPARE] ------------------------------- */
+
+// Now to process our main index.php file
 // We need to change some parts of index.php file in order to match our current environment
 $varholders = array(
 	'##JSLOCATION##',
@@ -131,7 +170,7 @@ $actual_vars = array(
 );
 
 $index_file_contents = str_replace($varholders,$actual_vars,$index_file_contents);
-file_put_contents('index_.php', $index_file_contents);
+file_put_contents('index.php', $index_file_contents);
 
 /* ------------------------------------ BUILD PROCESS [END] ------------------------------------ */
 // Display Script End time
@@ -149,4 +188,4 @@ foreach ($db_backup['content'] as $lang_branch) {
 // Finally, rewrite build.php filename to prevent other users from manual execution. This is not so necessary to do, cause I think there will be only one main site - but who knows how the things can be turned?
 $date = date_create();
 $timestamp = date_timestamp_get($date);
-rename('build.php', 'build_'.$timestamp.'.php');
+//rename('build.php', 'build_'.$timestamp.'.php');
