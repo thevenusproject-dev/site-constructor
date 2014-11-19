@@ -17,6 +17,7 @@ $site_constructor_repo = $api_github.'/repos/thevenusproject-dev/site-constructo
 $database_repo = $api_github.'/repos/thevenusproject-dev/database';
 $database_branches = $api_github.'/repos/thevenusproject-dev/database/branches';
 $site_zip = 'https://github.com/thevenusproject-dev/site-constructor/archive/master.zip';
+$style_filename = 'style.min.css';
 
 // Necessary function to parse pages
 function builder_curl_get($url, $is_json=0, $data='') {
@@ -136,7 +137,9 @@ $css_buffer = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '),
 
 $dir = 'css';
 if (!file_exists($dir)) mkdir ($dir, 0744);
-file_put_contents($dir.'/style.min.css', $css_buffer);
+file_put_contents($dir.'/'.$style_filename, $css_buffer);
+$style_css_ver = filemtime($dir.'/'.$style_filename);
+$style_filename = $style_filename.'?v='.$style_css_ver;
 
 // Favicon?
 $favicon_url = builder_curl_get($raw_github.'/thevenusproject-dev/site-constructor/master/favicon.png');
@@ -145,7 +148,9 @@ $favicon_src = 'data:image/png;base64,'.$favicon_data;
 
 // .htaccess
 $htaccess_contents = 
-'<IfModule mod_rewrite.c>
+'
+AddDefaultCharset UTF-8
+<IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d 
@@ -166,12 +171,14 @@ rename($c->_getCacheFileName(),$js_cache_filename);
 
 $varholders = array(
 	'##JSLOCATION##',
-	'##FAVICONSRC##'
+	'##FAVICONSRC##',
+	'##STYLECSSNAME##',
 );
 
 $actual_vars = array(
 	$js_cache_filename,
-	$favicon_src
+	$favicon_src,
+	$style_filename
 );
 
 $index_file_contents = str_replace($varholders,$actual_vars,$index_file_contents);

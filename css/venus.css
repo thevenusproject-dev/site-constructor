@@ -166,19 +166,38 @@ span
 }
 
 /******************************************************************************/
-/*  HOME                                                                      */
+/*  VIDEO SECTION                                                             */
 /******************************************************************************/
-.home
+.video_section
 {
 	width: 100%;
 	height: 550px;
-	background-image: url('../images/top_image.jpg');
-	background-size: cover;
-	background-color: transparent;
-	background-position: center center;
-	background-repeat: no-repeat;
+	overflow:hidden;
+	background:#002032;
 }
-
+.video_section > div.container 
+{
+	margin-top:-550px;
+}
+#video_bg {
+	width: 2000px;
+	display: block;
+	margin:0 auto;
+}
+.home .list_carousel
+{
+	width: 385px;
+}
+ul#vid_view li:first-child
+{
+	padding-bottom: 10px;
+	font-size: 34px;
+	letter-spacing: -0.03em;
+	line-height: 34px;
+	font-weight: 300; 
+	text-align: left;
+	color: #fff;
+}
 /******************************************************************************/
 /*  NAVIGATION                                                                */
 /******************************************************************************/
@@ -385,20 +404,6 @@ a#testimonials-next, a#about-left-next, a#about-middle-next, a#about-right-next
 a#testimonials-prev.hover_effect, a#testimonials-next.hover_effect, a#about-left-prev.hover_effect, a#about-left-next.hover_effect, a#about-middle-prev.hover_effect, a#about-middle-next.hover_effect, a#about-right-prev.hover_effect, a#about-right-next.hover_effect
 {
 	background-position: left bottom;
-}
-.home .list_carousel
-{
-	width: 385px;
-}
-ul#home-slides li  
-{
-	padding-bottom: 10px;
-	font-size: 34px;
-	letter-spacing: -0.03em;
-	line-height: 34px;
-	font-weight: 300; 
-	text-align: left;
-	color: #fff;
 }
 .services .list_carousel
 {
@@ -1026,6 +1031,10 @@ div.vimeo
 .m-top-260
 {
 	margin-top: 260px;
+}
+.m-top-445
+{
+	margin-top:445px;
 }
 .m-bottom-10
 {
