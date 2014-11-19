@@ -39,11 +39,18 @@ else $content = file_get_contents(CONTENT_DIR .'404' . $file_format);
 <!DOCTYPE html>
 <html>
 	<head>
-	<link rel="icon" type="image/x-icon" href="##FAVICONSRC##">
 		<title><?php echo ucwords(strtolower($url)); ?></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<meta name="author" content="TheVenusProjectCommunity" />
+		<link rel="icon" type="image/x-icon" href="##FAVICONSRC##">
 	</head>
-		<xmp theme="<?php echo $theme; ?>" style="display:none;">
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+		<div id="content">
 			<?php echo $content; ?>
-		</xmp>
+		</div>
 	<script src="<?php echo $script_location; ?>"></script>
 </html>
