@@ -39,18 +39,14 @@ else $content = file_get_contents(CONTENT_DIR .'404' . $file_format);
 <html>
 	<head>
 		<title><?php echo ucwords(strtolower($url)); ?></title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<meta name="author" content="TheVenusProjectCommunity" />
-		<link rel="icon" type="image/x-icon" href="##FAVICONSRC##">
-		<link type="text/css" rel="stylesheet" href="css/style.min.css" />
+		<link rel="icon" type="image/x-icon" href="##FAVICONSRC##" />
+		<link type="text/css" rel="stylesheet" media="all" href="css/style.min.css" />
+		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	</head>
-	<!--[if lt IE 9]>
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-		<div class="container" id="content">
-			<?php echo $content; ?>
-		</div>
+	<div class="container" id="content"><?php echo $content; ?></div>
 	<script src="<?php echo $script_location; ?>"></script>
 </html>
