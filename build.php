@@ -162,6 +162,7 @@ file_put_contents('.htaccess', $htaccess_contents);
 // Now to process our main index.php file
 // We need to change some parts of index.php file in order to match our current environment
 $js_cache_filename = str_replace('.js','_'.$timestamp.'.js',$c->_getCacheFileName());
+rename($c->_getCacheFileName(),$js_cache_filename);
 
 $varholders = array(
 	'##JSLOCATION##',

@@ -1,8 +1,9 @@
-(function(window, document) {
+$(function() {
 
   // Generate Markdown
-  var html = marked(markdown);
-  document.getElementById('content').innerHTML = html;
+  var markdown_content = $('#content').innerHTML;
+  var html = marked(markdown_content);
+  $('#content').innerHTML = html;
 
   // Prettify
   var codeEls = document.getElementsByTagName('code');
@@ -13,4 +14,4 @@
   }
   prettyPrint();
 
-})(window, document);
+});

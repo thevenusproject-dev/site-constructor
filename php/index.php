@@ -13,8 +13,7 @@ include('php/_functions.php');
 
 // Options
 $script_location = "##JSLOCATION##";
-$theme = "venus";
-$file_format = ".md";
+$file_format = ".md"; // Markdown
 
 $url = '';
 $request_url = (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : '';
@@ -45,11 +44,12 @@ else $content = file_get_contents(CONTENT_DIR .'404' . $file_format);
 		<meta name="keywords" content="" />
 		<meta name="author" content="TheVenusProjectCommunity" />
 		<link rel="icon" type="image/x-icon" href="##FAVICONSRC##">
+		<link type="text/css" rel="stylesheet" href="css/style.min.css" />
 	</head>
 	<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-		<div id="content">
+		<div class="container" id="content">
 			<?php echo $content; ?>
 		</div>
 	<script src="<?php echo $script_location; ?>"></script>
