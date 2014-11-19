@@ -10,8 +10,8 @@
 		"desc": "Grid system"
 	},
 	{
-  		"link": "https://raw.githubusercontent.com/thevenusproject-dev/site-constructor/master/css/prettify.css",
-		"desc": "Pretty printing styles. Used with prettify.js. http://google-code-prettify.googlecode.com"
+  		"link": "https://raw.githubusercontent.com/thevenusproject-dev/site-constructor/master/css/venus.css",
+		"desc": "Main site theme"
 	}
 	]
 }
