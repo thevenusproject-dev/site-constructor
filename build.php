@@ -69,7 +69,7 @@ $time_start = microtime(true);
 $date = date_create();
 $timestamp = date_timestamp_get($date);
 
-// Grab js files from the list
+// Grab js files from the list. If we have some script with 'inactive' parameter - we won't add it to main scripts pool
 $js_files = builder_curl_get($site_constructor_repo.'/contents/js', 1);
 
 foreach ($js_files['content'] as $js_file) {
@@ -79,7 +79,9 @@ foreach ($js_files['content'] as $js_file) {
 	} else {
 		$js_raw = builder_curl_get($raw_github.'/thevenusproject-dev/site-constructor/master/'.$js_file->path, 1);
 		foreach ($js_raw['content']->scripts as $js_script_info) {
-			$js_files_array[] = $js_script_info->link;
+			if (!isset($js_script_info->inactive)) {
+				$js_files_array[] = $js_script_info->link;
+			}
 		}
 	}
 	
@@ -139,7 +141,7 @@ $dir = 'css';
 if (!file_exists($dir)) mkdir ($dir, 0744);
 file_put_contents($dir.'/'.$style_filename, $css_buffer);
 $style_css_ver = filemtime($dir.'/'.$style_filename);
-$style_filename = $style_filename.'?v='.$style_css_ver;
+$style_filename = '/'.$style_filename.'?v='.$style_css_ver;
 
 // Favicon?
 $favicon_url = builder_curl_get($raw_github.'/thevenusproject-dev/site-constructor/master/favicon.png');
@@ -166,7 +168,7 @@ file_put_contents('.htaccess', $htaccess_contents);
 
 // Now to process our main index.php file
 // We need to change some parts of index.php file in order to match our current environment
-$js_cache_filename = str_replace('.js','_'.$timestamp.'.js',$c->_getCacheFileName());
+$js_cache_filename = str_replace('.js','_'.$timestamp.'.js','/'.$c->_getCacheFileName());
 rename($c->_getCacheFileName(),$js_cache_filename);
 
 $varholders = array(

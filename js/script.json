@@ -7,7 +7,7 @@
 	},
 	{
 		"link": "https://raw.githubusercontent.com/chjj/marked/master/lib/marked.js",
-		"desc": "A full-featured markdown parser and compiler, written in JavaScript. Needed for page generation from GitHub"
+		"desc": "A full-featured markdown parser and compiler, written in JavaScript. Needed for page generation from GitHub!"
 	},
 	{
 		"link": "https://raw.githubusercontent.com/garand/sticky/master/jquery.sticky.js",
@@ -15,15 +15,22 @@
 	},
 	{
 		"link": "https://raw.githubusercontent.com/jquery/jquery-mousewheel/master/jquery.mousewheel.min.js",
-		"desc": "A jQuery plugin that adds cross-browser mouse wheel support."
+		"desc": "A jQuery plugin that adds cross-browser mouse wheel support.",
+		"inactive": true
 	},
 	{
 		"link": "https://raw.githubusercontent.com/mattbryson/TouchSwipe-Jquery-Plugin/master/jquery.touchSwipe.min.js",
-		"desc": "TouchSwipe is a jquery plugin to be used with jQuery on touch input devices such as iPad, iPhone etc."
+		"desc": "TouchSwipe is a jquery plugin to be used with jQuery on touch input devices such as iPad, iPhone etc.",
+		"inactive": true
+	},
+	{
+		"link": "https://raw.githubusercontent.com/radmen/miuri.js/master/lib/miuri.min.js",
+		"desc": "Miuri is simple JavaScript class for parsing URIs."
 	},
 	{
 		"link": "https://raw.githubusercontent.com/gilbitron/carouFredSel/master/jquery.carouFredSel-6.2.1-packed.js",
-		"desc": "A circular, responsive carousel plugin built using the jQuery."
+		"desc": "A circular, responsive carousel plugin built using the jQuery.",
+		"inactive": true
 	}
 	]
 }
