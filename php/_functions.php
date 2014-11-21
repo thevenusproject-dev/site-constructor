@@ -35,4 +35,25 @@ function createKey($length, $option=0) {
     }
     return $key;
 }
+/*
+  Function: detect_locale
+  Detects user's locale. Defaults to english, if failed to get. Needed for multilanguage site.
+*/
+function detect_locale() {
+    if(isset($_SESSION["lang"])){
+        $lang = $_SESSION["lang"];
+        return $lang;
+    }
+    if(isset($_SESSION["id"])){
+        $user = new User($_SESSION["id"]);
+        $lang = $user->get_locale();
+        return $lang;
+    }
+    if(isset($_SERVER["HTTP_ACCEPT_LANGUAGE"])){
+        $lang = substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2);
+        return $lang;
+    }
+    $lang = "en";
+    return $lang;
+}
 ?>

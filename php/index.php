@@ -12,17 +12,32 @@ define('CONTENT_DIR', ROOT_DIR .'content/');
 include('php/_functions.php');
 
 // Options
-$script_location = "/##JSLOCATION##";
+$script_location = "##JSLOCATION##";
 $file_format = ".md"; // Markdown
+$available_branches = "##AVAILABLE_BRANCHES##"; // What branches (languages) do we actually have on GitHub?
 
-// Working with URI
+// Working with URI and detecting locale (multilanguage)
 $url = '';
+$err_msg = '';
 $request_url = (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : '';
 $script_url  = (isset($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : '';
 $full_url = $request_url.$script_url;
-	
-// Get our url path and trim the / of the left and the right
-if($request_url != $script_url) $url = trim(preg_replace('/'.str_replace('/', '\/', str_replace('index.php', '', $script_url)) .'/', '', $request_url, 1), '/');
+$locale = detect_locale();
+
+// Get our url path and trim the / of the left and the right + working with locales
+if($request_url != $script_url) {
+	$url = trim(preg_replace('/'.str_replace('/', '\/', str_replace('index.php', '', $script_url)) .'/', '', $request_url, 1), '/');
+}
+if ($request_url == '/') {
+	header("Location: /".$locale,TRUE,303); // With current locale detected, we are sending a 303 header which tells crawler where to go and redirects user to their language zone
+}
+
+// Setting up original link to this content, stored on GitHub - just for comparing cases and ofc for coders, who want to modify particular file
+if ($url != $locale) {
+	$git_origin = str_replace($locale.'/',strtoupper($locale.'/'),$url);
+} else {
+	$git_origin = strtoupper($url);
+}
 
 // Get the file path
 if($url) $file = strtolower(CONTENT_DIR.$url);
@@ -33,22 +48,34 @@ if(is_dir($file)) $file = CONTENT_DIR.$url.'/index'.$file_format;
 else $file .= $file_format;
 
 // Show 404 if file cannot be found
-if(file_exists($file)) $content = file_get_contents($file);
-else $content = file_get_contents(CONTENT_DIR .'404' . $file_format);
-
+if(file_exists($file)) {
+	$content = file_get_contents($file);
+} else {
+	$content = file_get_contents(CONTENT_DIR .'404' . $file_format);
+	$git_origin = '';
+}
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
-		<title><?php echo ucwords(strtolower($url)); ?></title>
+		<title>The Venus Project: <?php echo ucwords(strtolower($url)); ?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<meta name="author" content="TheVenusProjectCommunity" />
 		<link rel="icon" type="image/x-icon" href="##FAVICONSRC##" />
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans&subset=latin,cyrillic" rel="stylesheet" type="text/css" />
-		<link type="text/css" rel="stylesheet" media="all" href="css/##STYLECSSNAME##" />
+		<link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+		<link type="text/css" rel="stylesheet" media="all" href="/css/##STYLECSSNAME##" />
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+		<? if ($git_origin) { 
+			// Setting the variable, that refers to GitHub unique content page
+			echo "<script>var git_origin = 'https://github.com/thevenusproject-dev/database/tree/{$git_origin}';</script>";
+		} else { 
+			// If 404 encountered - throw a message
+			$err_msg = '<h3>Currently available versions of this site:</h3><p>'.$available_branches.'</p><blockquote><h2>Please notice!</h2><p>If you think this page should be here, please refer to <a href="https://github.com/thevenusproject-dev/database/tree/'.strtoupper($locale).'" target="_blank">https://github.com/thevenusproject-dev/database/tree/'.strtoupper($locale).'</a>, fork branch and revise the structure. If you prefer to change another language branch structure, change <b>'.strtoupper($locale).'</b> locale in the link above to your preferred one.</p><h6>Questions?</h6><p>Read database related info <a href="https://github.com/thevenusproject-dev/database/wiki" target="_blank" title="TVP Database WIKI">here</a> or site visual structure stuff <a href="https://github.com/thevenusproject-dev/site-constructor/wiki" target="_blank" title="TVP Site & Visual part WIKI">here</a>. Thanks.</p></blockquote>';
+		}
+		?>
 	</head>
 	<div id="header_block_hooks"></div>
 	<div id="main-menu">
@@ -69,7 +96,7 @@ else $content = file_get_contents(CONTENT_DIR .'404' . $file_format);
 			</nav>
 		</div>
 	</div>
-	<div class="container m-top-50" id="content"><?php echo $content; ?></div>
+	<div class="container m-top-50" id="content"><?php echo $content.$err_msg; ?></div>
 		<table class="doc-loader">
 			<tr>
 				<td>
@@ -106,5 +133,5 @@ if (strpos($full_url,'/video/') !== false) { ?>
 		</div>
 	</div>
 <? } ?>
-	<script src="<?php echo $script_location; ?>"></script>
+	<script src="/<?php echo $script_location; ?>"></script>
 </html>

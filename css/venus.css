@@ -207,6 +207,7 @@ h6
 	font-size:12px;
 	line-height:14px;
 	text-transform:uppercase;
+	margin-bottom: 10px;
 }
 strong, b{
 	font-weight: bold;
@@ -265,6 +266,12 @@ pre>code {
 code {
 	display:block;
 	background:#DDE8EB;
+	color:#4f6367;
+	padding:10px;
+}
+blockquote {
+	display:block;
+	background:#EDEDED;
 	color:#4f6367;
 	padding:10px;
 }

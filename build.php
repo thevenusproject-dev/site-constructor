@@ -87,8 +87,14 @@ foreach ($js_files['content'] as $js_file) {
 	
 }
 
-// Get our database branches to show after compilation - in case if someone will want a local backup aside from GitHub
-$db_backup = builder_curl_get($database_branches, 1);
+// Get our database branches to show after compilation - in case if someone will want a local backup aside from GitHub + we need them for multilanguage purpose
+$db_structure = builder_curl_get($database_branches, 1);
+
+foreach ($db_structure['content'] as $lang_branch) {
+	$lang_branches[] = $lang_branch;
+}
+
+$lang_branches_string = implode(",",$lang_branches);
 
 // Grab, save and include all the necessary PHP files
 $php_files = builder_curl_get($site_constructor_repo.'/contents/php', 1);
@@ -141,7 +147,7 @@ $dir = 'css';
 if (!file_exists($dir)) mkdir ($dir, 0744);
 file_put_contents($dir.'/'.$style_filename, $css_buffer);
 $style_css_ver = filemtime($dir.'/'.$style_filename);
-$style_filename = '/'.$style_filename.'?v='.$style_css_ver;
+$style_filename = $style_filename.'?v='.$style_css_ver;
 
 // Favicon?
 $favicon_url = builder_curl_get($raw_github.'/thevenusproject-dev/site-constructor/master/favicon.png');
@@ -175,12 +181,14 @@ $varholders = array(
 	'##JSLOCATION##',
 	'##FAVICONSRC##',
 	'##STYLECSSNAME##',
+	'##AVAILABLE_BRANCHES##'
 );
 
 $actual_vars = array(
 	$js_cache_filename,
 	$favicon_src,
-	$style_filename
+	$style_filename,
+	$lang_branches_string
 );
 
 $index_file_contents = str_replace($varholders,$actual_vars,$index_file_contents);
@@ -195,7 +203,7 @@ echo '<b>Done.</b> Total execution time: '.$execution_time.' sec.<br />';
 // Display links on backup files to download on user's local machine. User can choose all of them or select particular language branch to save.
 echo 'Also you can <a href="'.$site_zip.'">download zipped site archive</a> as a backup to your local computer.<br />';
 
-foreach ($db_backup['content'] as $lang_branch) {
+foreach ($db_structure['content'] as $lang_branch) {
 	echo '+ <a href="https://github.com/thevenusproject-dev/database/archive/'.$lang_branch->name.'.zip">Download <b>'.$lang_branch->name.'</b> database branch</a><br />';
 }
 
