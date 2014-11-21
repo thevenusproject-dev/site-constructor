@@ -12,9 +12,10 @@ define('CONTENT_DIR', ROOT_DIR .'content/');
 include('php/_functions.php');
 
 // Options
-$script_location = "/js/22aa6c731a2b9495edda15d7f6fbee9c_1416414324.js";
+$script_location = "/##JSLOCATION##";
 $file_format = ".md"; // Markdown
 
+// Working with URI
 $url = '';
 $request_url = (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : '';
 $script_url  = (isset($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : '';
@@ -44,10 +45,9 @@ else $content = file_get_contents(CONTENT_DIR .'404' . $file_format);
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<meta name="author" content="TheVenusProjectCommunity" />
-		<link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAe1BMVEUAAAA4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODgSvgbKAAAAKHRSTlMAK+jY8JEWDfbjAvzKsDPGcGVdV7kHoJdBODAlHBHs39KofB9KvoZSyuynPgAAAYlJREFUOMttkouSgjAMRUMLXcobAQUVRd3H/f8v3KZSiuIZZ+g0yU1uKq0I6kOpxZRX/Rdt+arLFI5rv4nvJlhSmyXO7+V7GPR+VwTB8fs3q4lObeDjqgQg65FmEvPbQwxLPccjDnvOAhBOw+jHO3rjeAWmp5sGgI970xcjy4dOAgf6wM4In57fK0ttyW1lkgE1faRIIUYKUmgWOOftbZxd3drWbuoHaKgG9tb7jWey/AJ5woeKrw6uwyNEbI2fQoSPZw8goxKYN3Y3hfw1Uvd5WzEkXZEGc2sJfBP16eJKhRCkTYI3niU8WU2rhAwoiHk6bnpg6si34If4oxkTFNr2IT+kteK4ATypo+JVDoBkSWeVvTpaXlRnZ3fc13rHFBdl78pk+e/oUL09FqkLUPk39seGn3uWDQvacBKuXZcB+vgeDyQgxzlXG43hNd4I4LJUFQJSrcNDDhPvV3rZn0nLq+Kh1GOoWhiml65dQh1fx2EYg4mjcTOVwIKIAtqQqCYqpdayjJrVQP9ejyv8P9y1ZQAAAABJRU5ErkJggg==" />
+		<link rel="icon" type="image/x-icon" href="##FAVICONSRC##" />
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans&subset=latin,cyrillic" rel="stylesheet" type="text/css" />
-		<link href='http://fonts.googleapis.com/css?family=Exo+2&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-		<link type="text/css" rel="stylesheet" media="all" href="/css/style.min.css?v=1416414335" />
+		<link type="text/css" rel="stylesheet" media="all" href="css/##STYLECSSNAME##" />
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	</head>
 	<div id="header_block_hooks"></div>
