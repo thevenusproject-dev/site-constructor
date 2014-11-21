@@ -91,7 +91,7 @@ foreach ($js_files['content'] as $js_file) {
 $db_structure = builder_curl_get($database_branches, 1);
 
 foreach ($db_structure['content'] as $lang_branch) {
-	$lang_branches[] = $lang_branch;
+	$lang_branches[] = $lang_branch->name;
 }
 
 $lang_branches_string = implode(",",$lang_branches);
