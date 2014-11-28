@@ -350,9 +350,9 @@ blockquote {
 {
 	display: inline-block;
 	height: 100%;
-	font-size: 11px;
+	font-size: 10px;
 	line-height: 70px;
-	letter-spacing: 0.2em;
+	letter-spacing: 0.1em;
 	list-style-type: none;
 	text-transform: uppercase;
 }
@@ -367,8 +367,8 @@ blockquote {
 #main-menu nav a
 {
 	display: block;
-	padding-left: 18px;
-	padding-right: 18px;
+	padding-left: 9px;
+	padding-right: 9px;
 	text-decoration: none; 
 }
 #main-menu nav ul li.active a

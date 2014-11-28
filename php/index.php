@@ -18,7 +18,6 @@ $available_branches = "##AVAILABLE_BRANCHES##"; // What branches (languages) do 
 
 // Working with URI and detecting locale (multilanguage)
 $url = '';
-$err_msg = '';
 $request_url = (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : '';
 $script_url  = (isset($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : '';
 $full_url = $request_url.$script_url;
@@ -87,19 +86,13 @@ if(file_exists($file)) {
 				<div class="logo"></div>
 				<aside class="right">
 					<ul>
-						<li class="active first"><a href="#home">Home</a></li>
-						<li><a href="#services">Services</a></li>
-						<li><a href="#about">About</a></li>
-						<li><a href="#portfolio">Portfolio</a></li>
-						<li><a href="#news">News</a></li>
-						<li><a href="#milestones">Milestones</a></li>
-						<li class="last"><a href="#contact">Contact</a></li>
+						<li class="active first"><a href="#home">The Venus Project Menu</a></li>
 					</ul>
 				</aside>
 			</nav>
 		</div>
 	</div>
-	<div class="container m-top-50" id="content"><?php echo $content.$err_msg; ?></div>
+	<div class="container m-top-50" id="content"><?php echo $content; ?></div>
 		<table class="doc-loader">
 			<tr>
 				<td>
