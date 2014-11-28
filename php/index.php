@@ -51,7 +51,8 @@ else $file .= $file_format;
 if(file_exists($file)) {
 	$content = file_get_contents($file);
 } else {
-	$content = file_get_contents(CONTENT_DIR .'404' . $file_format);
+	if (!file_exists(CONTENT_DIR.$locale.'/404'.$file_format)) $locale = 'en'; // Defaults 404 error to EN if no user locale found
+	$content = file_get_contents(CONTENT_DIR.$locale.'/404'.$file_format);
 	$git_origin = '';
 }
 ?>
@@ -68,14 +69,16 @@ if(file_exists($file)) {
 		<link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
 		<link type="text/css" rel="stylesheet" media="all" href="/css/##STYLECSSNAME##" />
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-		<? if ($git_origin) { 
+		<script>
+		<? 
+		if ($git_origin) 
+		{ 
 			// Setting the variable, that refers to GitHub unique content page
-			echo "<script>var git_origin = 'https://github.com/thevenusproject-dev/database/tree/{$git_origin}';</script>";
-		} else { 
-			// If 404 encountered - throw a message
-			$err_msg = '<h3>Currently available versions of this site:</h3><p>'.$available_branches.'</p><blockquote><h2>Please notice!</h2><p>If you think this page should be here, please refer to <a href="https://github.com/thevenusproject-dev/database/tree/'.strtoupper($locale).'" target="_blank">https://github.com/thevenusproject-dev/database/tree/'.strtoupper($locale).'</a>, fork branch and revise the structure. If you prefer to change another language branch structure, change <b>'.strtoupper($locale).'</b> locale in the link above to your preferred one.</p><h6>Questions?</h6><p>Read database related info <a href="https://github.com/thevenusproject-dev/database/wiki" target="_blank" title="TVP Database WIKI">here</a> or site visual structure stuff <a href="https://github.com/thevenusproject-dev/site-constructor/wiki" target="_blank" title="TVP Site & Visual part WIKI">here</a>. Thanks.</p></blockquote>';
+			echo "var git_origin = 'https://github.com/thevenusproject-dev/database/tree/{$git_origin}';";
 		}
 		?>
+		var available_branches = '<?=$available_branches;?>';
+		</script>
 	</head>
 	<div id="header_block_hooks"></div>
 	<div id="main-menu">

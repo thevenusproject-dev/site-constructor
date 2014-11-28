@@ -187,20 +187,9 @@ foreach ($js_files['content'] as $js_file) {
 	
 }
 
-<<<<<<< HEAD
 // Combine all the JSON files into one, assigning their filename+locale as an array name
 scanDir::scan('content', 'json', true);
 $js_additional_files_array[] = 'js/venus_db.json';
-=======
-// Get our database branches to show after compilation - in case if someone will want a local backup aside from GitHub + we need them for multilanguage purpose
-$db_structure = builder_curl_get($database_branches, 1);
-
-foreach ($db_structure['content'] as $lang_branch) {
-	$lang_branches[] = $lang_branch->name;
-}
-
-$lang_branches_string = implode(",",$lang_branches);
->>>>>>> origin/master
 
 // Grab, save and include all the necessary PHP files
 $php_files = builder_curl_get($site_constructor_repo.'/contents/php', 1);
