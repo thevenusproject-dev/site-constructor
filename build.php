@@ -187,10 +187,6 @@ foreach ($js_files['content'] as $js_file) {
 	
 }
 
-// Combine all the JSON files into one, assigning their filename+locale as an array name
-scanDir::scan('content', 'json', true);
-$js_additional_files_array[] = 'js/venus_db.json';
-
 // Grab, save and include all the necessary PHP files
 $php_files = builder_curl_get($site_constructor_repo.'/contents/php', 1);
 
@@ -223,6 +219,10 @@ foreach ($css_files_array as $css_file_link) {
 	$css = builder_curl_get($css_file_link);
 	$css_buffer .= $css['content'];
 }
+
+// Combine all the JSON files into one, assigning their filename+locale as an array name
+scanDir::scan('content', 'json', true);
+$js_additional_files_array[] = 'js/venus_db.json';
 
 // Now we have all the needed files included. Let's start to gather GitHub files and after that build our visual part :)
 // Let's use our PHP wrapper for the Google Closure JS Compiler web service (https://developers.google.com/closure/compiler/) to compile all the needed JS files into one.
