@@ -7,7 +7,6 @@ $(function() {
   
   // Stick the menu
 	$("#main-menu").sticky({ topSpacing: 0 });
-  
 
   // Working with URI to activate various needed stuff. We have 3 zones to append code into: header, sidebar and footer. Existing examples in code below will show you how to use it.
 	var fullurl = document.URL+'/index.php';
@@ -23,16 +22,24 @@ $(function() {
 		}
 	}
 	
-  //Building menu from current locale
-	var first = ' first';
-	(venus_db['content'][current_locale]['menu_items']).forEach(function(e) {
-		$('<li class="link'+first+'"><a href="/'+current_locale+'/'+e['link']+'">'+e['name']+'</a></li>').appendTo('#topmenu');
-		if (first) {
-			first = '';
-		}
+  // Building menu from current locale
+	var menu_links = venus_db['content'][current_locale]['menu_items'];
+	var length = menu_links.length;
+	var i = 0;
+	menu_links.forEach(function(e) {
+		i++;
+		if (i == 1) { var class_type = ' first'; } else if (i == length) { var class_type = ' last'} else { var class_type = ''; }
+		$('<li class="link'+class_type+'"><a href="/'+current_locale+'/'+e['link']+'">'+e['name']+'</a></li>').appendTo('#topmenu, ul.navigation');
+
+	});
+	
+  // Burger menu for lowresolutions
+	$("#nav-trigger").click(function() {
+		$('ul.navigation').toggle();
+		$('.logo').toggleClass('right');
 	});
 	
   // After all the stuff, fade out the loader
-	$('.doc-loader').fadeOut('slow');
+	$('.doc-loader').fadeOut('fast');
 	
 });
