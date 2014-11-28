@@ -23,6 +23,14 @@ $script_url  = (isset($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : '';
 $full_url = $request_url.$script_url;
 $locale = detect_locale();
 
+// Get currently viewed locale
+$locs = explode(',',$available_branches);
+foreach ($locs as $loc) {
+	if (strpos($full_url,'/'.strtolower($loc).'/') !== false or strpos($full_url,'/'.$loc.'/') !== false) {
+		$viewed_locale = strtolower($loc);
+	}
+}
+
 // Get our url path and trim the / of the left and the right + working with locales
 if($request_url != $script_url) {
 	$url = trim(preg_replace('/'.str_replace('/', '\/', str_replace('index.php', '', $script_url)) .'/', '', $request_url, 1), '/');
@@ -50,8 +58,9 @@ else $file .= $file_format;
 if(file_exists($file)) {
 	$content = file_get_contents($file);
 } else {
-	if (!file_exists(CONTENT_DIR.$locale.'/404'.$file_format)) $locale = 'en'; // Defaults 404 error to EN if no user locale found
-	$content = file_get_contents(CONTENT_DIR.$locale.'/404'.$file_format);
+	if (!file_exists(CONTENT_DIR.$viewed_locale.'/404'.$file_format)) $locale = 'en'; // Defaults 404 error to EN if no user locale found
+	if (!$viewed_locale) $viewed_locale = $locale;
+	$content = file_get_contents(CONTENT_DIR.$viewed_locale.'/404'.$file_format);
 	$git_origin = '';
 }
 ?>
@@ -64,7 +73,6 @@ if(file_exists($file)) {
 		<meta name="keywords" content="" />
 		<meta name="author" content="TheVenusProjectCommunity" />
 		<link rel="icon" type="image/x-icon" href="##FAVICONSRC##" />
-		<link href="http://fonts.googleapis.com/css?family=Open+Sans&subset=latin,cyrillic" rel="stylesheet" type="text/css" />
 		<link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
 		<link type="text/css" rel="stylesheet" media="all" href="/css/##STYLECSSNAME##" />
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -76,17 +84,23 @@ if(file_exists($file)) {
 			echo "var git_origin = 'https://github.com/thevenusproject-dev/database/tree/{$git_origin}';";
 		}
 		?>
+		
 		var available_branches = '<?=$available_branches;?>';
+		var client_locale = '<?=strtolower($locale);?>';
+		var current_locale = '<?=$viewed_locale;?>';
 		</script>
 	</head>
-	<div id="header_block_hooks"></div>
+	<div id="header_block_hooks">
+		<ul class="navigation"></ul>
+		<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+		<label for="nav-trigger"></label>
+	</div>
 	<div id="main-menu">
 		<div class="menu-wrapper">
 			<nav>
-				<div class="logo"></div>
+				<div class="logo" onclick="location.href='/<?=$viewed_locale;?>'" id="logo_<?=$viewed_locale;?>"></div>
 				<aside class="right">
-					<ul>
-						<li class="active first"><a href="#home">The Venus Project Menu</a></li>
+					<ul id="topmenu">
 					</ul>
 				</aside>
 			</nav>

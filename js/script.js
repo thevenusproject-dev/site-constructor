@@ -23,6 +23,9 @@ $(function() {
 	}
 	
   // Building menu from current locale
+	if (typeof current_locale === 'undefined') {
+		var current_locale = client_locale;
+	}
 	var menu_links = venus_db['content'][current_locale]['menu_items'];
 	var length = menu_links.length;
 	var i = 0;
