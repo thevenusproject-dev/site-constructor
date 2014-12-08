@@ -73,7 +73,7 @@ if(file_exists($file)) {
 		<meta name="keywords" content="" />
 		<meta name="author" content="TheVenusProjectCommunity" />
 		<link rel="icon" type="image/x-icon" href="##FAVICONSRC##" />
-		<link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Exo+2&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 		<link type="text/css" rel="stylesheet" media="all" href="/css/##STYLECSSNAME##" />
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 		<script>
@@ -90,13 +90,13 @@ if(file_exists($file)) {
 		var current_locale = '<?=$viewed_locale;?>';
 		</script>
 	</head>
-	<div id="header_block_hooks">
-		<ul class="navigation"></ul>
-		<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-		<label for="nav-trigger"></label>
-	</div>
 	<div id="main-menu">
 		<div class="menu-wrapper">
+		<div id="header_block_hooks">
+			<ul class="navigation"></ul>
+			<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+			<label for="nav-trigger"></label>
+		</div>
 			<nav>
 				<div class="logo" onclick="location.href='/<?=$viewed_locale;?>'" id="logo_<?=$viewed_locale;?>"></div>
 				<aside class="right">
@@ -106,6 +106,7 @@ if(file_exists($file)) {
 			</nav>
 		</div>
 	</div>
+	<div id="header_logo_hooks"></div>
 	<div class="container m-top-50" id="content"><?php echo $content; ?></div>
 		<table class="doc-loader">
 			<tr>
@@ -143,5 +144,23 @@ if (strpos($full_url,'/video/') !== false) { ?>
 		</div>
 	</div>
 <? } ?>
+</div>
+
+<footer>
+		<div class="container">	
+			<p>
+				<a href="http://thevenusproject.com" target="_blank">The Venus Project</a>: shaping the future. Together.
+			</p>
+			<div id="footer_block_hooks"></div>
+		</div>
+</footer>
 	<script src="/<?php echo $script_location; ?>"></script>
+<noscript>
+    <style type="text/css">
+        #wrap, footer {display:none;}
+    </style>
+    <div class="noscriptmsg">
+    You don't have javascript enabled. Please enable JS to view this site.
+    </div>
+</noscript>
 </html>

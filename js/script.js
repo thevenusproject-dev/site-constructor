@@ -17,22 +17,27 @@ $(function() {
 	if (typeof git_origin !== 'undefined') {
 		// Example of how to show videocontainer if we are in 'video' section (which refers to 'video' dir on GitHub), so we count it as a different TPL basically (with slightly different functionality) :)
 		if (trailing_slash_url.indexOf("/video/") >=0) {
-			$('<div class="video_section"></div>').appendTo('#header_block_hooks');
+			$('<div class="video_section"></div>').appendTo('#header_logo_hooks');
 			$('#video_top_container').show();
 		}
 	}
 	
   // Building menu from current locale
-	if (typeof current_locale === 'undefined') {
-		var current_locale = client_locale;
-	}
 	var menu_links = venus_db['content'][current_locale]['menu_items'];
 	var length = menu_links.length;
 	var i = 0;
 	menu_links.forEach(function(e) {
 		i++;
+		// Checking for first and last link to remove padding
 		if (i == 1) { var class_type = ' first'; } else if (i == length) { var class_type = ' last'} else { var class_type = ''; }
-		$('<li class="link'+class_type+'"><a href="/'+current_locale+'/'+e['link']+'">'+e['name']+'</a></li>').appendTo('#topmenu, ul.navigation');
+		
+		// Checking for active link, referring to URL
+		if (trailing_slash_url.indexOf("/"+e['link']+"/") >=0) {
+			var active_link = ' active';
+		} else {
+			var active_link = '';
+		}
+		$('<li class="link'+class_type+active_link+'"><a href="/'+current_locale+'/'+e['link']+'">'+e['name']+'</a></li>').appendTo('#topmenu, ul.navigation');
 
 	});
 	
@@ -42,7 +47,38 @@ $(function() {
 		$('.logo').toggleClass('right');
 	});
 	
+  // Language menu panel
+	var avail_langs = available_branches.split(',');
+		$('<div id="available_languages"></div>').appendTo('#header_logo_hooks');
+		
+		avail_langs.forEach(function(e) {
+		var language_link = trailing_slash_url.replace('/'+current_locale+'/','');
+		var language_link = language_link.replace('/'+e+'/','');
+
+			// Checking for active link, referring to URL
+			var lang_lower = e.toLowerCase();
+			if (trailing_slash_url.indexOf("/"+lang_lower+"/") >=0) {
+				var active_link = ' active';
+			} else {
+				var active_link = '';
+			}
+
+			if (language_link != '') {
+				// Removing trailing slash
+				var language_link = language_link.replace(/\/$/, "");
+				$('<a href="/'+lang_lower+'/'+language_link+'" class="avail_'+lang_lower+active_link+'">'+e+'</a>').appendTo('#available_languages');
+			} else {
+				$('<a href="/'+lang_lower+'" class="avail_'+lang_lower+active_link+'">'+e+'</a>').appendTo('#available_languages');
+			}
+		});
+
+  // Shortlinks menu panel
+	$('<div id="shortlinks"></div>').appendTo('#header_logo_hooks');
+	if (typeof(git_origin) !== 'undefined') {
+		$('<a href="'+git_origin+'" class="github_icon" target="_blank">a</a>').appendTo('#shortlinks');
+	}
+
   // After all the stuff, fade out the loader
-	$('.doc-loader').fadeOut('fast');
-	
+	$('.doc-loader').fadeOut('slow');
+
 });
