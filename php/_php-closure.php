@@ -371,6 +371,7 @@ class PhpClosure {
   function _unchunk($data) {
     $fp = 0;
     $outData = "";
+	
     while ($fp < strlen($data)) {
       $rawnum = substr($data, $fp, strpos(substr($data, $fp), "\r\n") + 2);
       $num = hexdec(trim($rawnum));
