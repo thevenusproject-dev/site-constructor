@@ -78,7 +78,6 @@ a:active
 /*  TABLES                                                                    */
 /******************************************************************************/
 table {
-    /* Remove spacing between table cells (from Normalize.css) */
     border-collapse: collapse;
     border-spacing: 0;
     empty-cells: show;
@@ -95,12 +94,12 @@ table caption {
 
 table td,
 table th {
-    border-left: 1px solid #cbcbcb;/*  inner column border */
+    border-left: 1px solid #cbcbcb;
     border-width: 0 0 0 1px;
     font-size: inherit;
     margin: 0;
-    overflow: visible; /*to make ths where the title is really long work*/
-    padding: 0.5em 1em; /* cell padding */
+    overflow: visible;
+    padding: 0.5em 1em;
 }
 table td:first-child,
 table th:first-child {
@@ -121,12 +120,10 @@ table-odd td {
     background-color: #f2f2f2;
 }
 
-/* nth-child selector for modern browsers */
 table-striped tr:nth-child(2n-1) td {
     background-color: #f2f2f2;
 }
 
-/* BORDERED TABLES */
 table-bordered td {
     border-bottom: 1px solid #cbcbcb;
 }
@@ -134,8 +131,6 @@ table-bordered tbody > tr:last-child > td {
     border-bottom-width: 0;
 }
 
-
-/* HORIZONTAL BORDERED TABLES */
 table-horizontal td,
 table-horizontal th {
     border-width: 0 0 1px 0;
@@ -429,36 +424,9 @@ background:url('data:image/svg+xml,%3Csvg%20xmlns%3Ardf%3D%22http%3A%2F%2Fwww.w3
 	font-size: 13px;
 	line-height: 13px;
 }
-/******************************************************************************/
-/*  FOOTER                                                                    */
-/******************************************************************************/
-footer
-{
-	text-align: center;
-	position: relative;
-	margin-top: -40px;
-	height: 40px;
-	clear:both;
-	font-size:13px;
+#shortlinks a.grey {
+color:#777;
 }
-footer p {
-	font-size:13px;
-}
-html, body, #wrap {height: 100%;}
-
-body > #wrap {height: auto; min-height: 100%;}
-
-#content {padding-bottom: 50px;}
-.clearfix:after {content: ".";
-	display: block;
-	height: 0;
-	clear: both;
-	visibility: hidden;}
-.clearfix {display: inline-block;}
-
-* html .clearfix { height: 1%;}
-.clearfix {display: block;}
-
 .github_icon {
 	text-align:center;
 	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAA2UlEQVR4AYXRoU7DUACF4a8VYFAIHoCEDoLczJK9BwFXVVtPAgSLgww8AoHfG8wsWUVBkIDmCQoNhJByTZPmGv7fHnPOSQBkToyDVMEHrwCQKLVqc3lwrtYqJQCJhUZhSKGxkAClxsiWIZv2NUrItAobftw7curMsRvfdhRaGRdqbOsid1E7T40tMRUzxdIkBKyRi8mxNk4BmZgDIFWZ4EnMMyaqEDDDlQ9DvlxiZt3XZM+1F13wzZ1D+pr9UHArBDyCkUYZT/0uBPzGU/dnrXzqBK30Z/n37j89J1VmZxvD3gAAAABJRU5ErkJggg8c712014dbfb7f72f608207acc71172c') no-repeat;
@@ -476,10 +444,49 @@ body > #wrap {height: auto; min-height: 100%;}
 	line-height:16px;
 	font-weight:bold;
 }
-#shortlinks a.grey {
-color:#777;
+
+/******************************************************************************/
+/*  FOOTER                                                                    */
+/******************************************************************************/
+footer
+{
+	text-align: center;
+	position: relative;
+	margin-top: -40px;
+	height: 40px;
+	clear:both;
+	font-size:13px;
+}
+footer p {
+	font-size:13px;
 }
 
+html, body, #wrap {height: 100%;}
+
+body > #wrap {height: auto; min-height: 100%;}
+
+#content {padding-bottom: 50px;}
+.clearfix:after {content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;}
+.clearfix {display: inline-block;}
+
+* html .clearfix { height: 1%;}
+.clearfix {display: block;}
+
+.biglink {
+	font-size:18px;
+	font-weight:bold;
+	text-decoration:none;
+	border-bottom:0px;
+	padding:0 6px 0 6px;
+	line-height:12px;
+}
+.biglink:hover {
+	background:#EDEDED;
+}
 /******************************************************************************/
 /*  POPUP                                                                     */
 /******************************************************************************/
