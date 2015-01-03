@@ -100,6 +100,8 @@ if(file_exists($file)) {
 		var current_locale = '<?=$viewed_locale;?>';
 		</script>
 	</head>
+	<body>
+	<div id="wrap">
 	<div id="main-menu">
 		<div class="menu-wrapper">
 		<div id="header_block_hooks">
@@ -159,7 +161,7 @@ if (strpos($full_url,'/video/') !== false) { ?>
 <footer>
 		<div class="container">	
 			<p>
-				<a href="http://thevenusproject.com" target="_blank">The Venus Project</a>: shaping the future. Together. <a href="/<?=$viewed_locale;?>/about">?</a>
+				<a href="http://thevenusproject.com" target="_blank">The Venus Project</a>: shaping the future. Together. <a href="/<?=$viewed_locale;?>/about" class="biglink">?</a>
 			</p>
 			<div id="footer_block_hooks"></div>
 		</div>
@@ -173,4 +175,5 @@ if (strpos($full_url,'/video/') !== false) { ?>
     You don't have javascript enabled. Please enable JS to view this site.
     </div>
 </noscript>
+</body>
 </html>
