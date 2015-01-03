@@ -459,111 +459,27 @@ body > #wrap {height: auto; min-height: 100%;}
 * html .clearfix { height: 1%;}
 .clearfix {display: block;}
 
-/******************************************************************************/
-/*  TVP OFFICIAL SITE CUSTOM                                                  */
-/******************************************************************************/
-#footer .social-icons{float:right}
-#footer .social-icons li.title{line-height:30px}
-#footer .social-icons li{margin:0 0 0 10px}
-#footer .social-icons li:first-child{margin-left:0}
-.social-share{margin:25px 0 0;padding:0;list-style:none;text-align:center}
-.social-share li{display:inline-block;margin-left:10px;width:90px;max-height:20px;vertical-align:top}
-.social-share li.sc-gplus{width:70px}
-.social-share li.sc-pinterest>a{width:40px!important;margin-left:-40px!important;vertical-align:top!important}
-.social-share.colored{margin-top:15px}
-.social-share.colored li{padding:10px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}
-.social-share.colored li.sc-facebook{background:#3b5998}
-.social-share.colored li.sc-twitter{background:#3CF}
-.social-share.colored li.sc-gplus{background:#d34836;width:70px}
-.social-share.colored li.sc-pinterest{background:#cb2027}
-.social-icons{margin:0 0 20px}
-.social-icons li{display:inline-block;margin:2px;vertical-align:middle}
-.social-icons li a{display:inline-block;border:0px;width:30px;height:30px;text-indent:-9999px;background-image:url('http://www.thevenusproject.com/templates/kallyas/images/social-icons-sprite.png');background-repeat:no-repeat;position:relative;background-color:#111;-webkit-border-radius:30px;-moz-border-radius:30px;border-radius:30px;-webkit-transition:all .2s ease-out;-moz-transition:all .2s ease-out;-o-transition:all .2s ease-out;transition:all .2s ease-out}
-.social-icons li a:hover{background-color:#cd2122;text-decoration:none;border:0px;}
-.social-icons.has_gradient li a:after{content:'';position:absolute;left:0;top:0;width:100%;height:100%;background:-moz-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,0.2) 100%);background:-webkit-gradient(linear,left top,left bottom,color-stop(0,rgba(0,0,0,0)),color-stop(100%,rgba(0,0,0,0.2)));background:-webkit-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,0.2) 100%);background:-o-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,0.2) 100%);background:-ms-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,0.2) 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000',endColorstr='#33000000',GradientType=0)}
-.social-icons li.social-twitter a{background-position:0 0}
-.social-icons li.social-dribbble a{background-position:-30px 0}
-.social-icons li.social-facebook a{background-position:-60px 0}
-.social-icons li.social-envato a{background-position:-90px 0}
-.social-icons li.social-flickr a{background-position:-120px 0}
-.social-icons li.social-forrst a{background-position:-150px 0}
-.social-icons li.social-gplus a{background-position:-180px 0}
-.social-icons li.social-gplus2 a{background-position:-210px 0}
-.social-icons li.social-icloud a{background-position:-240px 0}
-.social-icons li.social-lastfm a{background-position:-270px 0}
-.social-icons li.social-linkedin a{background-position:-300px 0}
-.social-icons li.social-myspace a{background-position:-330px 0}
-.social-icons li.social-paypal a{background-position:0 -30px}
-.social-icons li.social-piacasa a{background-position:-30px -30px}
-.social-icons li.social-pinterest a{background-position:-60px -30px}
-.social-icons li.social-reedit a{background-position:-90px -30px}
-.social-icons li.social-rss a{background-position:-120px -30px}
-.social-icons li.social-skype a{background-position:-150px -30px}
-.social-icons li.social-stumbleupon a{background-position:-180px -30px}
-.social-icons li.social-tumblr a{background-position:-210px -30px}
-.social-icons li.social-vimeo a{background-position:-240px -30px}
-.social-icons li.social-wordpress a{background-image:url('http://www.thevenusproject.com/images/vk-icon.png');background-position:center center;}
-.social-icons li.social-yahoo a{background-position:-300px -30px}
-.social-icons li.social-youtube a{background-position:-330px -30px}
-.social-icons li.social-blogger a{background-position:0 -60px}
-.social-icons li.social-deviantart a{background-position:-30px -60px}
-.social-icons li.social-digg a{background-position:-60px -60px}
-.social-icons li.social-foursquare a{background-position:-90px -60px}
-.social-icons li.social-friendfeed a{background-position:-120px -60px}
-.social-icons li.social-mail a{background-position:-150px -60px}
-.social-icons li.social-html5 a{background-position:-180px -60px}
-.social-icons li.social-technorati a{background-position:-210px -60px}
-.social-icons li.social-soundcloud a{background-position:-240px -60px}
-.social-icons li.social-quora a{background-position:-270px -60px}
-.social-icons li.social-bebo a{background-position:-300px -60px}
-.social-icons li.social-aim a{background-position:-330px -60px}
-.social-icons li.social-gosquared a{background-position:0 -90px}
-.social-icons li.social-dropbox a{background-position:-30px -90px}
-.social-icons li.social-github a{background-position:-60px -90px}
-.social-icons li.social-spotify a{background-position:-90px -90px}
-.social-icons li.social-apple a{background-position:-120px -90px}
-.social-icons.colored li.social-twitter a,.social-icons.coloredHov li.social-twitter a:hover{background-color:#00bdec}
-.social-icons.colored li.social-dribbble a,.social-icons.coloredHov li.social-dribbble a:hover{background-color:#ef5b92}
-.social-icons.colored li.social-facebook a,.social-icons.coloredHov li.social-facebook a:hover{background-color:#3b5998}
-.social-icons.colored li.social-envato a,.social-icons.coloredHov li.social-envato a:hover{background-color:#8dc050}
-.social-icons.colored li.social-flickr a,.social-icons.coloredHov li.social-flickr a:hover{background-color:#ea2698}
-.social-icons.colored li.social-forrst a,.social-icons.coloredHov li.social-forrst a:hover{background-color:#366725}
-.social-icons.colored li.social-gplus a,.social-icons.coloredHov li.social-gplus a:hover{background-color:#d94a39}
-.social-icons.colored li.social-gplus2 a,.social-icons.coloredHov li.social-gplus2 a:hover{background-color:#d94a39}
-.social-icons.colored li.social-icloud a,.social-icons.coloredHov li.social-icloud a:hover{background-color:#666}
-.social-icons.colored li.social-lastfm a,.social-icons.coloredHov li.social-lastfm a:hover{background-color:#d2013a}
-.social-icons.colored li.social-linkedin a,.social-icons.coloredHov li.social-linkedin a:hover{background-color:#1b92bd}
-.social-icons.colored li.social-myspace a,.social-icons.coloredHov li.social-myspace a:hover{background-color:#003398}
-.social-icons.colored li.social-paypal a,.social-icons.coloredHov li.social-paypal a:hover{background-color:#32689a}
-.social-icons.colored li.social-piacasa a,.social-icons.coloredHov li.social-piacasa a:hover{background-color:#8e5aa4}
-.social-icons.colored li.social-pinterest a,.social-icons.coloredHov li.social-pinterest a:hover{background-color:#cb2027}
-.social-icons.colored li.social-reedit a,.social-icons.coloredHov li.social-reedit a:hover{background-color:#82a6ce}
-.social-icons.colored li.social-rss a,.social-icons.coloredHov li.social-rss a:hover{background-color:#ff7f00}
-.social-icons.colored li.social-skype a,.social-icons.coloredHov li.social-skype a:hover{background-color:#18b7f1}
-.social-icons.colored li.social-stumbleupon a,.social-icons.coloredHov li.social-stumbleupon a:hover{background-color:#229d3d}
-.social-icons.colored li.social-tumblr a,.social-icons.coloredHov li.social-tumblr a:hover{background-color:#38526d}
-.social-icons.colored li.social-vimeo a,.social-icons.coloredHov li.social-vimeo a:hover{background-color:#01557a}
-.social-icons.colored li.social-wordpress a,.social-icons.coloredHov li.social-wordpress a:hover{background-color:#486b92}
-.social-icons.colored li.social-yahoo a,.social-icons.coloredHov li.social-yahoo a:hover{background-color:#ab64bc}
-.social-icons.colored li.social-youtube a,.social-icons.coloredHov li.social-youtube a:hover{background-color:#d20800}
-.social-icons.colored li.social-blogger a,.social-icons.coloredHov li.social-blogger a:hover{background-color:#ff7600}
-.social-icons.colored li.social-deviantart a,.social-icons.coloredHov li.social-deviantart a:hover{background-color:#768c82}
-.social-icons.colored li.social-digg a,.social-icons.coloredHov li.social-digg a:hover{background-color:#195695}
-.social-icons.colored li.social-foursquare a,.social-icons.coloredHov li.social-foursquare a:hover{background-color:#1b6cb4}
-.social-icons.colored li.social-friendfeed a,.social-icons.coloredHov li.social-friendfeed a:hover{background-color:#2f72c4}
-.social-icons.colored li.social-mail a,.social-icons.coloredHov li.social-mail a:hover{background-color:#b5b5b5}
-.social-icons.colored li.social-html5 a,.social-icons.coloredHov li.social-html5 a:hover{background-color:#e44d26}
-.social-icons.colored li.social-technorati a,.social-icons.coloredHov li.social-technorati a:hover{background-color:#5b0}
-.social-icons.colored li.social-soundcloud a,.social-icons.coloredHov li.social-soundcloud a:hover{background-color:#db5708}
-.social-icons.colored li.social-quora a,.social-icons.coloredHov li.social-quora a:hover{background-color:#852828}
-.social-icons.colored li.social-bebo a,.social-icons.coloredHov li.social-bebo a:hover{background-color:#a03939}
-.social-icons.colored li.social-aim a,.social-icons.coloredHov li.social-aim a:hover{background-color:#cdae2d}
-.social-icons.colored li.social-gosquared a,.social-icons.coloredHov li.social-gosquared a:hover{background-color:#556065}
-.social-icons.colored li.social-dropbox a,.social-icons.coloredHov li.social-dropbox a:hover{background-color:#2d76be}
-.social-icons.colored li.social-github a,.social-icons.coloredHov li.social-github a:hover{background-color:#667f8e}
-.social-icons.colored li.social-spotify a,.social-icons.coloredHov li.social-spotify a:hover{background-color:#62aa29}
-.social-icons.colored li.social-apple a,.social-icons.coloredHov li.social-apple a:hover{background-color:#859dab}
-.social-icons.colored li a:hover{background-color:#121212}
+.github_icon {
+	text-align:center;
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAA2UlEQVR4AYXRoU7DUACF4a8VYFAIHoCEDoLczJK9BwFXVVtPAgSLgww8AoHfG8wsWUVBkIDmCQoNhJByTZPmGv7fHnPOSQBkToyDVMEHrwCQKLVqc3lwrtYqJQCJhUZhSKGxkAClxsiWIZv2NUrItAobftw7curMsRvfdhRaGRdqbOsid1E7T40tMRUzxdIkBKyRi8mxNk4BmZgDIFWZ4EnMMyaqEDDDlQ9DvlxiZt3XZM+1F13wzZ1D+pr9UHArBDyCkUYZT/0uBPzGU/dnrXzqBK30Z/n37j89J1VmZxvD3gAAAABJRU5ErkJggg8c712014dbfb7f72f608207acc71172c') no-repeat;
+	display:block;
+	width:16px;
+	height:16px;
+	float:left;
+}
+.about_icon {
+	text-align:center;
+	display:block;
+	width:16px;
+	height:16px;
+	float:left;
+	line-height:16px;
+	font-weight:bold;
+}
+#shortlinks a.grey {
+color:#777;
+}
+
 /******************************************************************************/
 /*  POPUP                                                                     */
 /******************************************************************************/

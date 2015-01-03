@@ -15,6 +15,7 @@ include('php/_functions.php');
 $script_location = "##JSLOCATION##";
 $file_format = ".md"; // Markdown
 $available_branches = "##AVAILABLE_BRANCHES##"; // What branches (languages) do we actually have on GitHub?
+$working_files = array("index","readme","about"); // What files are the 'working in environment' ones?
 
 // Working with URI and detecting locale (multilanguage)
 $url = '';
@@ -41,9 +42,18 @@ if ($request_url == '/') {
 
 // Setting up original link to this content, stored on GitHub - just for comparing cases and ofc for coders, who want to modify particular file
 if ($url != $locale) {
-	$git_origin = str_replace($locale.'/',strtoupper($locale.'/'),$url);
+	$git_origin = str_replace($viewed_locale.'/',strtoupper($viewed_locale.'/'),$url);
+	$git_origin = $git_origin.$file_format;
 } else {
 	$git_origin = strtoupper($url);
+}
+
+// Transforming some filenames to uppercase (README, ABOUT, INDEX)
+foreach ($working_files as $wfile) {
+	$pos = strpos($git_origin, '/'.$wfile);
+	if ($pos !== false) {
+		$git_origin = str_replace('/'.$wfile,strtoupper('/'.$wfile),$git_origin);
+	}
 }
 
 // Get the file path
@@ -149,7 +159,7 @@ if (strpos($full_url,'/video/') !== false) { ?>
 <footer>
 		<div class="container">	
 			<p>
-				<a href="http://thevenusproject.com" target="_blank">The Venus Project</a>: shaping the future. Together.
+				<a href="http://thevenusproject.com" target="_blank">The Venus Project</a>: shaping the future. Together. <a href="/<?=$viewed_locale;?>/about">?</a>
 			</p>
 			<div id="footer_block_hooks"></div>
 		</div>

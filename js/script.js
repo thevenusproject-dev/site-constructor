@@ -75,10 +75,16 @@ $(function() {
   // Shortlinks menu panel
 	$('<div id="shortlinks"></div>').appendTo('#header_logo_hooks');
 	if (typeof(git_origin) !== 'undefined') {
-		$('<a href="'+git_origin+'" class="github_icon" target="_blank">a</a>').appendTo('#shortlinks');
+		$('<a href="'+git_origin+'" class="github_icon" target="_blank"></a>').appendTo('#shortlinks');
 	}
-
+	if (trailing_slash_url.indexOf("/readme") >=0) {
+		var back_link = url.pathinfo().dirname.replace('/readme','');
+		$('<a href="'+back_link+'" class="about_icon">X</a>').appendTo('#shortlinks');
+	} else {
+		$('<a href="'+trailing_slash_url+'readme" class="about_icon">?</a>').appendTo('#shortlinks');
+	}
   // After all the stuff, fade out the loader
 	$('.doc-loader').fadeOut('slow');
+
 
 });
