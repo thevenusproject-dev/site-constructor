@@ -27,6 +27,7 @@ $style_filename = 'style.min.css';
 $index_file = 'index.php';
 $content_dir = 'content';
 $hashes_dir = 'hashes';
+$version = '1.0';
 
 // Necessary function to parse pages
 function builder_curl_get($url, $is_json=0, $data='') {
@@ -278,14 +279,16 @@ $varholders = array(
 	'##JSLOCATION##',
 	'##FAVICONSRC##',
 	'##STYLECSSNAME##',
-	'##AVAILABLE_BRANCHES##'
+	'##AVAILABLE_BRANCHES##',
+	'##VERSION##'
 );
 
 $actual_vars = array(
 	$js_cache_filename,
 	$favicon_src,
 	$style_filename,
-	$lang_branches_string
+	$lang_branches_string,
+	$version.'.'.$timestamp
 );
 
 $index_file_contents = str_replace($varholders,$actual_vars,$index_file_contents);

@@ -16,6 +16,7 @@ $script_location = "##JSLOCATION##";
 $file_format = ".md"; // Markdown
 $available_branches = "##AVAILABLE_BRANCHES##"; // What branches (languages) do we actually have on GitHub?
 $working_files = array("index","readme","about"); // What files are the 'working in environment' ones?
+$version = "##VERSION##";
 
 // Working with URI and detecting locale (multilanguage)
 $url = '';
@@ -161,7 +162,7 @@ if (strpos($full_url,'/video/') !== false) { ?>
 <footer>
 		<div class="container">	
 			<p>
-				<a href="http://thevenusproject.com" target="_blank">The Venus Project</a>: shaping the future. Together. <a href="/<?=$viewed_locale;?>/about" class="biglink">?</a>
+				<a href="http://thevenusproject.com" target="_blank">The Venus Project</a>: shaping the future. Together. <a href="/<?=$viewed_locale;?>/about" class="biglink">?</a> <small>v.<?=$version;?></small>
 			</p>
 			<div id="footer_block_hooks"></div>
 		</div>
