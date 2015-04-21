@@ -122,6 +122,27 @@ if (!file_exists($content_dir.'/'.$index_file)) file_put_contents($content_dir.'
 if (!file_exists($hashes_dir)) mkdir ($hashes_dir, 0744);
 if (!file_exists($hashes_dir.'/'.$index_file)) file_put_contents($hashes_dir.'/'.$index_file, "<?php // Silence is golden. ?>");
 
+// PHP INCLUDE FIRST, so we could inlcude the functions, while including the functions. So, grab, save and include all the necessary PHP files
+$php_files = builder_curl_get($site_constructor_repo.'/contents/php', 1);
+
+foreach ($php_files['content'] as $php_file) {
+	$php_raw = builder_curl_get($raw_github.'/thevenusproject-dev/site-constructor/master/'.$php_file->path);
+	
+	$dir = 'php';
+	if (!file_exists($dir)) mkdir ($dir, 0744);
+	if ($php_file->name != 'index.php') {
+		file_put_contents($php_file->path, $php_raw['content']);
+	} else {
+		file_put_contents($php_file->path, "<?php // Silence is golden. ?>");
+		$index_file_contents = $php_raw['content'];
+	}
+	
+	// If our file has an _ at the beginning - we are including it in builder part
+	if ($php_file->path[4] == '_') {
+		include($php_file->path);
+	}
+}
+
 // Get our database branches info
 $db_structure = builder_curl_get($database_branches, 1); // 1 means format is JSON, 0 is raw text.
 
@@ -186,27 +207,6 @@ foreach ($js_files['content'] as $js_file) {
 		}
 	}
 	
-}
-
-// Grab, save and include all the necessary PHP files
-$php_files = builder_curl_get($site_constructor_repo.'/contents/php', 1);
-
-foreach ($php_files['content'] as $php_file) {
-	$php_raw = builder_curl_get($raw_github.'/thevenusproject-dev/site-constructor/master/'.$php_file->path);
-	
-	$dir = 'php';
-	if (!file_exists($dir)) mkdir ($dir, 0744);
-	if ($php_file->name != 'index.php') {
-		file_put_contents($php_file->path, $php_raw['content']);
-	} else {
-		file_put_contents($php_file->path, "<?php // Silence is golden. ?>");
-		$index_file_contents = $php_raw['content'];
-	}
-	
-	// If our file has an _ at the beginning - we are including it in builder part
-	if ($php_file->path[4] == '_') {
-		include($php_file->path);
-	}
 }
 
 // Get our CSS files and minify them using regexp
