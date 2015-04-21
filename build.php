@@ -151,7 +151,7 @@ foreach ($db_structure['content'] as $lang_branch) {
 					}
 					if ($db_lang->type == 'blob') {
 						$raw_file = builder_curl_get($database_repo_raw.'/'.strtoupper($lang_branch->name).'/'.$db_lang->path);
-							file_put_contents($cdir.'/'.strtolower($db_lang->path), $raw_file['content']);
+							file_put_contents($cdir.'/'.strtolower($db_lang->path), convert_specials($raw_file['content']));
 							file_put_contents($hdir.'/'.$db_lang->sha, '');
 					}
 				} else {

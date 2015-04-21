@@ -57,6 +57,39 @@ function detect_locale() {
     return $lang;
 }
 /*
+  Function: convert_specials
+  Converts some of the markdown predefined code into HTML code
+*/
+function convert_specials($c) {
+	
+	// Converting markdown links to tooltips, if there are predefined options set in primary source. Regexp to the help :D
+	
+	if (preg_match_all("/(\[(.*?)\]\(\#tooltip(.*?)\s\"(.*?)\"\))/i", $c, $matches)) {
+		foreach ($matches[2] as $k => $v) {
+			$tooltip_item = strip_tags($matches[2][$k]);
+			$tooltip_parameters_string = $matches[3][$k];
+			$tooltip_text =  strip_tags($matches[4][$k]);
+			parse_str($tooltip_parameters_string, $tooltip_parameters);
+			
+			// If size is not defined - we use default
+			if (!isset($tooltip_parameters['size'])) {
+				$tooltip_parameters['size'] = 64;
+			}
+			if (!isset($tooltip_parameters['flaticon_id'])) {
+				$tooltip_parameters['flaticon_id'] = 23679;
+			}
+			if (!$tooltip_text) {
+				$tooltip_text = 'TOOLTIP_TEXT_NOT_DEFINED';
+			}
+			$tooltip_body = '<span class="tooltip tooltip-effect-3"><span class="tooltip-item">'.$tooltip_item.'</span><span class="tooltip-content"><img src="http://cdn.flaticon.com/png/'.$tooltip_parameters['size'].'/'.$tooltip_parameters['flaticon_id'].'.png" /><span class="tooltip-text">'.$tooltip_text.'</span></span></span>';
+			$c = str_replace($matches[1][$k],$tooltip_body,$c);
+		}
+	}
+
+	return $c;
+
+}
+/*
   Class: scanDir
   http://php.net/manual/ru/function.scandir.php#114184
 */
