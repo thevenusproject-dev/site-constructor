@@ -1,4 +1,4 @@
-$(function() {
+$(window).load(function() {
 
   // Generate Markdown
 	var markdown_content = $('#content').html();
@@ -16,7 +16,7 @@ $(function() {
   // Check if we have real page, not 404 - then check that page for particular part and append some code to existing divs or work with existing elements (reveal/hide)
 	if (typeof git_origin !== 'undefined') {
 		// Example of how to show videocontainer if we are in 'video' section (which refers to 'video' dir on GitHub), so we count it as a different TPL basically (with slightly different functionality) :)
-		if (trailing_slash_url.indexOf("/video/") >=0) {
+		if (trailing_slash_url.indexOf("/video/") >=0 && trailing_slash_url.indexOf("/video/readme") <=0) {
 			$('<div class="video_section"></div>').appendTo('#header_logo_hooks');
 			$('#video_top_container').show();
 		}
@@ -89,8 +89,11 @@ $(function() {
 		}
 	}
 	
-  // After all the stuff, fade out the loader
-	$('.doc-loader').fadeOut('slow');
+  // After all the stuff, fade out the loader and show the content (we need it to be hidden initially for prevent jumping div markdown transform :P)
+	setTimeout(function(){
+		$('.doc-loader').fadeOut('slow');
+		$('#content').show();
+	}, 200);
 
 
 });

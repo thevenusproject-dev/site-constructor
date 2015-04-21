@@ -471,6 +471,11 @@ footer
 footer p {
 	font-size:13px;
 }
+footer sup {
+	display:block;
+	color:#ccc;
+	font-size:11px;
+}
 
 html, body, #wrap {height: 100%;}
 

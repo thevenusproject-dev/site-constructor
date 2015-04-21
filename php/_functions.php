@@ -65,6 +65,7 @@ class scanDir {
     static private $directories, $files, $ext_filter, $recursive;
 
 // ----------------------------------------------------------------------------------------------
+
     // scan(dirpath::string|array, extensions::string|array, recursive::true|false)
     static public function scan(){
         // Initialize defaults
@@ -90,7 +91,11 @@ class scanDir {
             else
             if(gettype($args[1]) == "string"){self::$ext_filter[] = strtolower($args[1]);}
         }
-
+		
+		// Unlink old stuff (this code should not be here :B)
+		$mask = 'js/venus_*.*';
+		array_map('unlink', glob($mask));
+		
         // Grab path(s)
         self::verifyPaths($args[0]);
         return self::$files;
@@ -109,7 +114,7 @@ class scanDir {
             }
         }
 
-        if($path_errors){echo "The following directories do not exists<br />";die(var_dump($path_errors));}
+        if($path_errors){echo "The following directories are not existing<br />";die(var_dump($path_errors));}
     }
 	
 	
@@ -119,48 +124,68 @@ class scanDir {
         $root = scandir($dir);
         foreach($root as $value){
             if($value === '.' || $value === '..') {continue;}
+
             if(is_file($dir.DIRECTORY_SEPARATOR.$value)){
                 if(!self::$ext_filter || in_array(strtolower(pathinfo($dir.DIRECTORY_SEPARATOR.$value, PATHINFO_EXTENSION)), self::$ext_filter)){
                     self::$files[] = $result[] = $dir.DIRECTORY_SEPARATOR.$value;
                 }
                 continue;
             }
-			
             if(self::$recursive){
-                foreach(self::find_contents($dir.DIRECTORY_SEPARATOR.$value) as $value) {
-                    self::$files[] = $result[] = $value;
-                }
+				$recs = self::find_contents($dir.DIRECTORY_SEPARATOR.$value);
+				if ($recs) {
+					foreach($recs as $value) {
+						self::$files[] = $result[] = $value;
+					}
+				}
             }
         }
-								foreach ($result as $rpath) {
-									$d = explode(DIRECTORY_SEPARATOR,$rpath);
-									$contents = file_get_contents($rpath);
-									foreach (self::$ext_filter as $ext) {
-
-										if (strpos($rpath,'.json') !== false) {
-												
-												if (count($d) == 1) {
-													$arr[$d[0]] = json_decode($contents);
-												}
-												if (count($d) == 2) {
-													$val = str_replace('.json','',$d[1]);
-													$arr[$d[0]][$val] = json_decode($contents);
-												}
-												if (count($d) == 3) {
-													$val = str_replace('.json','',$d[2]);
-													$arr[$d[0]][$d[1]][$val] = json_decode($contents);
-												}
-												if (count($d) == 4) {
-													$val = str_replace('.json','',$d[3]);
-													$arr[$d[0]][$d[1]][$d[2]][$val] = json_decode($contents);
-												}
-										}
-									}
-								}
-		// Write JSON
-		file_put_contents('js/venus_db.json', 'var venus_db = '.json_encode($arr));
 		
-        // Return required for recursive search
-        return $result;
+		// Here we are working with subdirs (max. depth 4). Code is pretty crappy, but it does the job xD
+		foreach ($result as $rpath) {
+			$d = explode(DIRECTORY_SEPARATOR,$rpath);
+			$contents = file_get_contents($rpath);
+			foreach (self::$ext_filter as $ext) {
+				if (strpos($rpath,'.'.$ext) !== false) {
+					if (count($d) == 1) {
+						$arr[$d[0]] = json_decode($contents);
+						echo $d[0];
+					}
+					if (count($d) == 2) {
+						$val = str_replace('.'.$ext,'',$d[1]);
+						$arr[$val][$d[0]] = json_decode($contents);
+					}
+					if (count($d) == 3) {
+						$val = str_replace('.'.$ext,'',$d[2]);
+						$arr[$d[1]][$d[0]][$val] = json_decode($contents);
+					}
+					if (count($d) == 4) {
+						$val = str_replace('.'.$ext,'',$d[3]);
+						$arr[$d[1]][$d[0]][$d[2]][$val] = json_decode($contents);
+					}
+				}
+			}
+		}
+		
+		// Write JSON
+		if ($arr) {
+			// Writing up new
+			foreach ($arr as $k => $v) {
+				$json = json_encode($v);
+				$json = preg_replace_callback(
+					'/\\\\u([0-9a-f]{4})/i',
+					function ($matches) {
+						$sym = mb_convert_encoding(
+							pack('H*', $matches[1]),
+							'UTF-8',
+							'UTF-16'
+						);
+						return $sym;
+					},
+					$json
+				);
+				file_put_contents('js/venus_'.$k.'.js', 'var venus_db = '.$json.';', FILE_APPEND);
+			}
+		}
     }
 }
