@@ -271,9 +271,6 @@ rename($c->_getCacheFileName(),$js_cache_filename);
 
 // Combine all the JSON files into one, assigning their filename+locale as an array name (very dirty solution)
 scanDir::scan('content', 'json', true);
-$file_data = file_get_contents('js/venus_db.json');
-$file_data .= ';'.file_get_contents($js_cache_filename);
-file_put_contents($js_cache_filename, $file_data);
 
 $varholders = array(
 	'##JSLOCATION##',

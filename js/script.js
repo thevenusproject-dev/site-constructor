@@ -23,7 +23,7 @@ $(window).load(function() {
 	}
 	
   // Building menu from current locale
-	var menu_links = venus_db['content'][current_locale]['menu_items'];
+	var menu_links = venus_db['content']['menu_items'];
 	var length = menu_links.length;
 	var i = 0;
 	menu_links.forEach(function(e) {
