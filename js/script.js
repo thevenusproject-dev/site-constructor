@@ -79,34 +79,6 @@ j(window).load(function() {
 					return str;
 				}
 
-				// This is where we define our view and info for nodes (treeview FAQ)
-				// Use minifier to make it closure-compiler readable
-				// I know this part scares - if you know how to make it better - please report it to me directly :P <scsmash3r@gmail.com>
-				var json='{"name":"TVP_FAQ_TREE_VIEW_TEMPLATE",								"children":[{								'+t(q.question_1)+',									"children":[{										'+t(q.question_2)+',											"children":[{												'+t(q.question_4)+"											},											{												"+t(q.question_4)+"											}											]										},										{										"+t(q.question_2)+',											"children":[{												'+t(q.question_1)+"												}											]									}]								}]							}";
-				
-				/*var json = '{"name":"TVP_FAQ_TREE_VIEW_TEMPLATE",\
-								"children":[{\
-								'+t(q['question_1'])+',\
-									"children":[{\
-										'+t(q['question_2'])+',\
-											"children":[{\
-												'+t(q['question_4'])+'\
-											},\
-											{\
-												'+t(q['question_4'])+'\
-											}\
-											]\
-										},\
-										{\
-										'+t(q['question_2'])+',\
-											"children":[{\
-												'+t(q['question_1'])+'\
-												}\
-											]\
-									}]\
-								}]\
-							}';
-					*/
 				
 				// --- D3 RELATED START --- 
 				treeData = JSON.parse(json);
