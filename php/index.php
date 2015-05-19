@@ -160,12 +160,12 @@ if (strpos($full_url,'/video/') !== false && strpos($full_url,'/video/readme') =
 <? } 
 // End of "video" part tpl
 ?>
-</div>
-
 <? 
 // Enabling MUUT wall
 if (!$working_file) echo '<a class="muut" href="https://muut.com/i/tvp-test">tvp-test forum</a><script src="//cdn.muut.com/1/moot.min.js"></script>';
 ?>
+</div>
+
 
 <footer>
 		<div class="container">	
