@@ -20,6 +20,14 @@
 	{
 		"link": "https://raw.githubusercontent.com/mbostock/d3/master/d3.min.js",
 		"desc": "A JavaScript visualization library for HTML and SVG. http://d3js.org"
+	},
+	{
+		"link": "https://raw.githubusercontent.com/HubSpot/vex/master/js/vex.combined.min.js",
+		"desc": "A modern dialog library which is highly configurable and easy to style"
+	},
+	{
+		"link": "https://raw.githubusercontent.com/alfajango/jquery-dynatable/master/jquery.dynatable.js",
+		"desc": "A more-fun, semantic, alternative to datatables http://www.dynatable.com"
 	}
 	]
 }
