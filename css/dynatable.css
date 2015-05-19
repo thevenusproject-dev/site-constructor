@@ -8,16 +8,7 @@
  *
  * Date: Tue Jan 02 2014
  */
-th {
-  background: #006a72;
-}
-th a {
-  color: #fff;
-}
-th a:hover {
-  color: #fff;
-  text-decoration: underline;
-}
+
 
 .dynatable-search {
   float: right;
@@ -51,22 +42,53 @@ th a:hover {
 .dynatable-active-page,
 .dynatable-disabled-page {
   cursor: text;
+  
+}
+.dynatable-active-page, .dynatable-disabled-page {
+	font-weight:bold !important;
+  text-decoration: none !important;
+  border-bottom:0px !important;
+  background:#fff !important;
 }
 .dynatable-active-page:hover,
 .dynatable-disabled-page:hover {
-  text-decoration: none;
+  text-decoration: none !important;
+  border-bottom:0px !important;
+  background:#fff !important;
+  color:#000 !important;
 }
 
-.dynatable-active-page {
-  background: #006a72;
-  border-radius: 5px;
-  color: #fff;
+.dynatable-sort-header {
+	font-weight:bold !important;
+	color:#bbb !important;
+	border-bottom:0px !important;
 }
-.dynatable-active-page:hover {
-  color: #fff;
+.dynatable-loaded {
+	margin:20px 0;
 }
-.dynatable-disabled-page,
-.dynatable-disabled-page:hover {
-  background: none;
-  color: #999;
+.dynatable-search {
+	color:#fff;
+}
+.dynatable-search input {
+	color:#000;
+}
+.dynatable-search i {
+	margin-right:-50px;
+	color:#2B7BC2;
+}
+.dynatable-per-page-label i {
+	color:#777;
+}
+.dynatable-loaded .cell img {
+	width:16px;
+	height:16px;
+	float:left;
+	margin-right:5px;
+}
+.dynatable-loaded .row{
+	font-size:12px;
+}
+.fa-dyna-rowsize {
+	font-size: 23px !important;
+	margin-right: 5px;
 }
