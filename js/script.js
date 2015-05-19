@@ -80,29 +80,33 @@ j(window).load(function() {
 				}
 
 				// This is where we define our view and info for nodes (treeview FAQ)
-				var json = '\
-					{"name":"TVP_FAQ_TREE_VIEW_TEMPLATE",\
-						"children":[{\
-						'+t(q['question_1'])+',\
-							"children":[{\
-								'+t(q['question_2'])+',\
+				// Use minifier to make it closure-compiler readable
+				// I know this part scares - if you know how to make it better - please report it to me directly :P <scsmash3r@gmail.com>
+				var json='{"name":"TVP_FAQ_TREE_VIEW_TEMPLATE",								"children":[{								'+t(q.question_1)+',									"children":[{										'+t(q.question_2)+',											"children":[{												'+t(q.question_4)+"											},											{												"+t(q.question_4)+"											}											]										},										{										"+t(q.question_2)+',											"children":[{												'+t(q.question_1)+"												}											]									}]								}]							}";
+				
+				/*var json = '{"name":"TVP_FAQ_TREE_VIEW_TEMPLATE",\
+								"children":[{\
+								'+t(q['question_1'])+',\
 									"children":[{\
-										'+t(q['question_4'])+'\
-									},\
-									{\
-										'+t(q['question_4'])+'\
-									}\
-									]\
-								},\
-								{\
-								'+t(q['question_2'])+',\
-									"children":[{\
-										'+t(q['question_1'])+'\
-										}\
-									]\
-							}]\
-						}]\
-					}';
+										'+t(q['question_2'])+',\
+											"children":[{\
+												'+t(q['question_4'])+'\
+											},\
+											{\
+												'+t(q['question_4'])+'\
+											}\
+											]\
+										},\
+										{\
+										'+t(q['question_2'])+',\
+											"children":[{\
+												'+t(q['question_1'])+'\
+												}\
+											]\
+									}]\
+								}]\
+							}';
+					*/
 				
 				// --- D3 RELATED START --- 
 				treeData = JSON.parse(json);
@@ -754,6 +758,7 @@ j(window).load(function() {
 	
   // After all the stuff, fade out the loader
 	setTimeout(function(){
+		
 		// Sorry to write this chunk of code, but since I don't have 90$ per month to pay, it goes like this =(
 		var hide_muut = document.getElementById("moot-logo");
 		if (typeof(hide_muut) != 'undefined' && hide_muut !== null)

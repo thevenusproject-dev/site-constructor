@@ -196,7 +196,7 @@ $js_files = builder_curl_get($site_constructor_repo.'/contents/js', 1);
 
 foreach ($js_files['content'] as $js_file) {
 	
-	if (strpos($js_file->path, '.json') === false) {
+	if (strpos($js_file->path, '.json') !== false) {
 		$js_raw = builder_curl_get($raw_github.'/thevenusproject-dev/site-constructor/master/'.$js_file->path, 1);
 		foreach ($js_raw['content']->scripts as $js_script_info) {
 			if (!isset($js_script_info->inactive)) {
@@ -221,7 +221,7 @@ foreach ($css_files_array as $css_file_link) {
 
 // Now we have all the needed files included. Let's start to gather GitHub files and after that build our visual part :)
 // Let's use our PHP wrapper for the Google Closure JS Compiler web service (https://developers.google.com/closure/compiler/) to compile all the needed JS files into one.
-$js_files = array_merge($js_files_array);
+$js_files = $js_files_array;
 
 $c = new PhpClosure();
 $c->add_array($js_files)
@@ -262,14 +262,14 @@ file_put_contents('.htaccess', $htaccess_contents);
 
 /* ------------------------------ BUILD PROCESS [VISUAL PREPARE] ------------------------------- */
 
-// Now to process our main index.php file
-// We need to change some parts of index.php file in order to match our current environment
 $js_cache_filename = str_replace('.js','_'.$timestamp.'.js',$c->_getCacheFileName());
 rename($c->_getCacheFileName(),$js_cache_filename);
 
 // Combine all the JSON files into one, assigning their filename+locale as an array name (very dirty solution)
 scanDir::scan('content', 'json', true);
 
+// Now to process our main index.php file
+// We need to change some parts of index.php file in order to match our current environment
 $varholders = array(
 	'##JSLOCATION##',
 	'##FAVICONSRC##',
