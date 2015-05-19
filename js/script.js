@@ -1,4 +1,3 @@
-// We need this to prevent conflicts between libraries
 var j = jQuery.noConflict();
 
 j(window).load(function() {
