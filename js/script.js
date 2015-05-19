@@ -667,10 +667,11 @@ j(window).load(function() {
 						  if (record.link.indexOf("dotsub.com") >=0) { icon = '<img src="https://dotsub.com/styles/dotsub2/images/favicon.ico" alt="Dotsub" title="Dotsub">'; }
 						  if (record.link.indexOf("translatedby.com") >=0) { icon = '<img src="http://translatedby.com/appmedia/images/favicon.ico" alt="Translatedby" title="Translatedby">'; }
 						  if (record.link.indexOf("cotranslate.net") >=0) { icon = '<img src="https://pbs.twimg.com/profile_images/1522668855/facecat_normal.png" alt="Cotranslate" title="Cotranslate">'; }
-						  						  
+						  if (record.link.indexOf("trello.com") >=0) { icon = '<img src="https://d78fikflryjgj.cloudfront.net/images/ios/8de2074e8a785dd5d498f8f956267478/apple-touch-icon-precomposed.png" alt="Trello" title="Trello">'; }
+						  
 						  // Relative link icon
 						  var rel_link = '';
-						  if (record.rel_link) { rel_link = '<a href="'+record.rel_link+'" target="_blank"><i class="fa fa-external-link fa-lg"></i></a>'; }
+						  if (record.rel_link) { rel_link = '<a href="'+record.rel_link+'" target="_blank" title="'+record.rel_link+'"><i class="fa fa-external-link fa-lg"></i></a>'; }
 						  
 						  // Translations table view
 						  td = '<tr class="' + cssClass + '"><td class="cell">'+icon+'<a href="'+record.link+'" target="_blank">' + record.name + ' / '+record.name_original+'</a></td><td>' + record.about + '</td><td>' + rel_link + '</td><td>' + record.keywords + '</td></tr>';
@@ -812,6 +813,12 @@ j(window).load(function() {
 
 		j('.doc-loader').fadeOut('slow');
 		j('#content').show();
+		
+		setTimeout(function(){
+			var hide_muut = document.getElementById("moot-logo");
+			if (typeof(hide_muut) != 'undefined' && hide_muut !== null)	{ hide_muut.getElementsByTagName('a')[0].style.display = 'none'; }
+		}, 1000);
+	
 	}, 600);
 
 });
