@@ -630,30 +630,7 @@ j(window).load(function() {
 						  return td;
 						}
 						
-						// Setting up our data with the Dynatable help
-						// More info for coders here: http://www.dynatable.com/
-						j('#'+current_view+'-list').bind('dynatable:init', function(e, dynatable) {
-							j(".dynatable-search").prepend('<i class="fa fa-search fa-lg"></i>');
-						  }).dynatable({
-						  dataset: {
-							records: records,
-							perPageDefault: 50,
-						  },
-						  inputs: {
-							paginationPrev: '«',
-							paginationNext: '»',
-							perPageText: '<i class="fa fa-eye fa-lg"></i> ',
-							recordCountText: 'Showing ',
-							processingText: 'Loading...'
-						  },
-						  features: {
-							recordCount: false,
-						  },
-						  writers: {
-							_rowWriter: tdWriter
-						  }
-						});
-	
+
 					} else {
 						// If no data is found in the file
 						j('#content').html('<h1>Structure file has no elements in array for "'+current_view+'" view!</h1>');
