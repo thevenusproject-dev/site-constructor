@@ -78,10 +78,13 @@ function convert_specials($c) {
 			if (!isset($tooltip_parameters['flaticon_id'])) {
 				$tooltip_parameters['flaticon_id'] = 23679;
 			}
+			if (!isset($tooltip_parameters['color'])) {
+				$tooltip_parameters['color'] = 'FFF';
+			}
 			if (!$tooltip_text) {
 				$tooltip_text = 'TOOLTIP_TEXT_NOT_DEFINED';
 			}
-			$tooltip_body = '<span class="tooltip tooltip-effect-3"><span class="tooltip-item">'.$tooltip_item.'</span><span class="tooltip-content"><img src="http://cdn.flaticon.com/png/'.$tooltip_parameters['size'].'/'.$tooltip_parameters['flaticon_id'].'.png" /><span class="tooltip-text">'.$tooltip_text.'</span></span></span>';
+			$tooltip_body = '<span class="tooltip tooltip-effect-3"><span class="tooltip-item">'.$tooltip_item.'</span><span class="tooltip-content size_'.$tooltip_parameters['size'].'"><img src="http://cdn.flaticon.com/png/'.$tooltip_parameters['size'].'/'.$tooltip_parameters['flaticon_id'].'.png" style="background:#'.$tooltip_parameters['color'].'" /><span class="tooltip-text">'.$tooltip_text.'</span></span></span>';
 			$c = str_replace($matches[1][$k],$tooltip_body,$c);
 		}
 	}
@@ -131,6 +134,15 @@ class scanDir {
 		
         // Grab path(s)
         self::verifyPaths($args[0]);
+		
+		// Check for new files (really messy code, sorry %()
+		$files = glob($mask);
+		foreach ($files as $file) {
+			$file_contents = file_get_contents($file);
+			$file_contents = str_replace('}};var venus_db = {"content":{',",",$file_contents);
+			file_put_contents($file,$file_contents);
+		}
+
         return self::$files;
     }
 
@@ -200,9 +212,7 @@ class scanDir {
 			}
 		}
 		
-		// Write JSON
 		if ($arr) {
-			// Writing up new
 			foreach ($arr as $k => $v) {
 				$json = json_encode($v);
 				$json = preg_replace_callback(

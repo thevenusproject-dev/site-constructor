@@ -12,6 +12,10 @@
 	{
   		"link": "https://raw.githubusercontent.com/thevenusproject-dev/site-constructor/master/css/venus.css",
 		"desc": "Main site theme"
+	},
+	{
+  		"link": "https://raw.githubusercontent.com/thevenusproject-dev/site-constructor/master/css/vex.css",
+		"desc": "Vex modal dialogs theme http://github.hubspot.com/vex/api/basic/"
 	}
 	]
 }

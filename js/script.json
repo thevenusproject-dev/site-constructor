@@ -14,23 +14,20 @@
 		"desc": "Sticky is a jQuery plugin that gives you the ability to make any element on your page always stay visible."
 	},
 	{
-		"link": "https://raw.githubusercontent.com/jquery/jquery-mousewheel/master/jquery.mousewheel.min.js",
-		"desc": "A jQuery plugin that adds cross-browser mouse wheel support.",
-		"inactive": true
-	},
-	{
-		"link": "https://raw.githubusercontent.com/mattbryson/TouchSwipe-Jquery-Plugin/master/jquery.touchSwipe.min.js",
-		"desc": "TouchSwipe is a jquery plugin to be used with jQuery on touch input devices such as iPad, iPhone etc.",
-		"inactive": true
-	},
-	{
 		"link": "https://raw.githubusercontent.com/radmen/miuri.js/master/lib/miuri.min.js",
 		"desc": "Miuri is simple JavaScript class for parsing URIs."
 	},
 	{
-		"link": "https://raw.githubusercontent.com/gilbitron/carouFredSel/master/jquery.carouFredSel-6.2.1-packed.js",
-		"desc": "A circular, responsive carousel plugin built using the jQuery.",
-		"inactive": true
+		"link": "https://raw.githubusercontent.com/mbostock/d3/master/d3.min.js",
+		"desc": "A JavaScript visualization library for HTML and SVG. http://d3js.org",
+	},
+	{
+		"link": "https://raw.githubusercontent.com/HubSpot/vex/master/js/vex.combined.min.js",
+		"desc": "A modern dialog library which is highly configurable and easy to style",
+	},
+	{
+		"link": "https://raw.githubusercontent.com/alfajango/jquery-dynatable/master/jquery.dynatable.js",
+		"desc": "A more-fun, semantic, alternative to datatables http://www.dynatable.com",
 	}
 	]
 }

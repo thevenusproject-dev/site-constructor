@@ -20,7 +20,7 @@ $version = "##VERSION##";
 
 // Working with URI and detecting locale (multilanguage)
 $url = '';
-$request_url = (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : '';
+$request_url = (isset($_SERVER['REQUEST_URI'])) ? strtok($_SERVER['REQUEST_URI'],'?') : '';
 $script_url  = (isset($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : '';
 $full_url = $request_url.$script_url;
 $locale = detect_locale();
@@ -44,7 +44,7 @@ if ($request_url == '/') {
 // Setting up original link to this content, stored on GitHub - just for comparing cases and ofc for coders, who want to modify particular file
 if ($url != $locale) {
 	$git_origin = str_replace($viewed_locale.'/',strtoupper($viewed_locale.'/'),$url);
-	$git_origin = $git_origin.$file_format;
+	$git_origin = $git_origin;
 } else {
 	$git_origin = strtoupper($url);
 }
@@ -86,6 +86,7 @@ if(file_exists($file)) {
 		<link rel="icon" type="image/x-icon" href="##FAVICONSRC##" />
 		<link href='http://fonts.googleapis.com/css?family=Exo+2&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 		<link type="text/css" rel="stylesheet" media="all" href="/css/##STYLECSSNAME##" />
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 		<script>
 		<? 
@@ -160,6 +161,11 @@ if (strpos($full_url,'/video/') !== false && strpos($full_url,'/video/readme') =
 // End of "video" part tpl
 ?>
 </div>
+
+<? 
+// Enabling MUUT wall
+if (!$working_file) echo '<a class="muut" href="https://muut.com/i/tvp-test">tvp-test forum</a><script src="//cdn.muut.com/1/moot.min.js"></script>';
+?>
 
 <footer>
 		<div class="container">	
