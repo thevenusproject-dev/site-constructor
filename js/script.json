@@ -28,10 +28,6 @@
 	{
 		"link": "https://raw.githubusercontent.com/alfajango/jquery-dynatable/master/jquery.dynatable.js",
 		"desc": "A more-fun, semantic, alternative to datatables http://www.dynatable.com"
-	},
-	{
-		"link": "https://raw.githubusercontent.com/thevenusproject-dev/site-constructor/master/js/script.js",
-		"desc": "Last one should ALWAYS be our TVP core js script file. This is where all the things stored that making the website alive"
 	}
 	]
 }
