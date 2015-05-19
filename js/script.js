@@ -666,7 +666,8 @@ j(window).load(function() {
 						  if (record.link.indexOf("notabenoid.org") >=0) { icon = '<img src="http://notabenoid.org/i/favicon.ico" alt="Notabenoid" title="Notabenoid">'; }
 						  if (record.link.indexOf("dotsub.com") >=0) { icon = '<img src="https://dotsub.com/styles/dotsub2/images/favicon.ico" alt="Dotsub" title="Dotsub">'; }
 						  if (record.link.indexOf("translatedby.com") >=0) { icon = '<img src="http://translatedby.com/appmedia/images/favicon.ico" alt="Translatedby" title="Translatedby">'; }
-						  
+						  if (record.link.indexOf("cotranslate.net") >=0) { icon = '<img src="https://pbs.twimg.com/profile_images/1522668855/facecat_normal.png" alt="Cotranslate" title="Cotranslate">'; }
+						  						  
 						  // Relative link icon
 						  var rel_link = '';
 						  if (record.rel_link) { rel_link = '<a href="'+record.rel_link+'" target="_blank"><i class="fa fa-external-link fa-lg"></i></a>'; }
