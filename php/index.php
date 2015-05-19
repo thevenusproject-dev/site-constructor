@@ -166,8 +166,8 @@ if (strpos($full_url,'/video/') !== false && strpos($full_url,'/video/readme') =
 // End of "video" part tpl
 ?>
 <? 
-// Enabling MUUT wall
-if (!$working_file && empty($_SERVER['QUERY_STRING'])) echo '<a class="muut" href="https://muut.com/i/tvp-test">tvp-test forum</a><script src="//cdn.muut.com/1/moot.min.js"></script>';
+// Enabling MUUT wall, disabling only on FAQ tree view section (for now)
+if (!$working_file && ($_GET['view'] != 'tree')) echo '<a class="muut" href="https://muut.com/i/tvp-test">tvp-test forum</a><script src="//cdn.muut.com/1/moot.min.js"></script>';
 ?>
 </div>
 
