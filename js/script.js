@@ -1,6 +1,4 @@
-// We need this to prevent conflicts between libraries
 var j = jQuery.noConflict();
-
 j(window).load(function() {
 
 	// Setting standard messages, so users could interact with interface
