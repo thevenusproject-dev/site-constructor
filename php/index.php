@@ -55,6 +55,11 @@ foreach ($working_files as $wfile) {
 	if ($pos !== false) {
 		$git_origin = str_replace('/'.$wfile,strtoupper('/'.$wfile),$git_origin);
 	}
+	// Setting up for comments section (we don't want them to be shown on tech pages)
+	$pos = strpos($url, '/'.$wfile);
+	if ($pos !== false) {
+		$working_file = true;
+	}
 }
 
 // Get the file path
@@ -162,7 +167,7 @@ if (strpos($full_url,'/video/') !== false && strpos($full_url,'/video/readme') =
 ?>
 <? 
 // Enabling MUUT wall
-if (!$working_file) echo '<a class="muut" href="https://muut.com/i/tvp-test">tvp-test forum</a><script src="//cdn.muut.com/1/moot.min.js"></script>';
+if (!$working_file && empty($_SERVER['QUERY_STRING'])) echo '<a class="muut" href="https://muut.com/i/tvp-test">tvp-test forum</a><script src="//cdn.muut.com/1/moot.min.js"></script>';
 ?>
 </div>
 
