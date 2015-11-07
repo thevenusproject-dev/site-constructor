@@ -89,6 +89,8 @@ if(file_exists($file)) {
 		<title>The Venus Project: <?php echo ucwords(strtolower($url)); ?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="author" content="TheVenusProjectCommunity" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<link rel="icon" type="image/x-icon" href="##FAVICONSRC##" />
 		<link href='http://fonts.googleapis.com/css?family=Exo+2&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 		<link type="text/css" rel="stylesheet" media="all" href="/css/##STYLECSSNAME##" />
