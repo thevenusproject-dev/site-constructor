@@ -13,11 +13,12 @@ include('php/_functions.php');
 
 // Options
 $script_location = "##JSLOCATION##";
-$file_format = ".md"; // Markdown
-$available_branches = "##AVAILABLE_BRANCHES##"; // What branches (languages) do we actually have on GitHub?
+$file_format = ".md"; // Markdown. Don't change this, unless you're working with other file formats at GitHub
+$available_branches = "##AVAILABLE_BRANCHES##"; // What branches (languages) do we actually have on GitHub? This automatically generates by build.php
 $working_files = array("index","readme","about"); // What files are the 'working in environment' ones?
-$version = "##VERSION##";
+$version = "##VERSION##"; // Version autogenerates from timestamp. Needed for knowing, when all the stuff was generated last time.
 
+/* Below goes https://github.com/csu/singularity-cms stuff - don't change anything there, unless you know what you're doing */
 // Working with URI and detecting locale (multilanguage)
 $url = '';
 $request_url = (isset($_SERVER['REQUEST_URI'])) ? strtok($_SERVER['REQUEST_URI'],'?') : '';
@@ -53,7 +54,7 @@ if ($url != $locale) {
 foreach ($working_files as $wfile) {
 	$pos = strpos($git_origin, '/'.$wfile);
 	if ($pos !== false) {
-		$git_origin = str_replace('/'.$wfile,strtoupper('/'.$wfile),$git_origin);
+		$git_origin = str_replace('/'.$wfile,strtoupper('/'.$wfile).$file_format,$git_origin);
 	}
 	// Setting up for comments section (we don't want them to be shown on tech pages)
 	$pos = strpos($url, '/'.$wfile);
@@ -79,14 +80,14 @@ if(file_exists($file)) {
 	$content = file_get_contents(CONTENT_DIR.$viewed_locale.'/404'.$file_format);
 	$git_origin = '';
 }
+
+// Render the template
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>The Venus Project: <?php echo ucwords(strtolower($url)); ?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
 		<meta name="author" content="TheVenusProjectCommunity" />
 		<link rel="icon" type="image/x-icon" href="##FAVICONSRC##" />
 		<link href='http://fonts.googleapis.com/css?family=Exo+2&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
@@ -166,8 +167,8 @@ if (strpos($full_url,'/video/') !== false && strpos($full_url,'/video/readme') =
 // End of "video" part tpl
 ?>
 <? 
-// Enabling MUUT wall, disabling only on FAQ tree view section (for now)
-if (!$working_file && ($_GET['view'] != 'tree')) echo '<a class="muut" href="https://muut.com/i/tvp-test">tvp-test forum</a><script src="//cdn.muut.com/1/moot.min.js"></script>';
+// Enabling MUUT wall, disabling only on FAQ tree view section (for now it is disabled, was using in testing purpose)
+//if (!$working_file && ($_GET['view'] != 'tree')) echo '<a class="muut" href="https://muut.com/i/tvp-test">tvp-test forum</a><script src="//cdn.muut.com/1/moot.min.js"></script>';
 ?>
 </div>
 
