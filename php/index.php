@@ -92,7 +92,7 @@ if(file_exists($file)) {
 		<link rel="icon" type="image/x-icon" href="##FAVICONSRC##" />
 		<link href='http://fonts.googleapis.com/css?family=Exo+2&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 		<link type="text/css" rel="stylesheet" media="all" href="/css/##STYLECSSNAME##" />
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link type="text/css" rel="stylesheet" media="all" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 		<script>
 		<? 
