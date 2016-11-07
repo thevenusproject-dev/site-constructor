@@ -5,7 +5,7 @@ The Venus Project Site Assets
 ## EN
 This repo contains all the necessary links to script files and chunks of code, which are then used by a single construct file `build.php` to compile site's frontend, using current server environment.
 #####How this works?
-The `build.php` file makes an API request, collecting all the necessary information from received callback. It then saves all the requested data to the current user's hosting, checking for files `sha` hashes. The `build.php` file then receives new timestamp to rewrite default filename, hiding it from outer eyes. Futher requests to new `build_{timestamp}.php` will do API request again, checking for changed hashes, and if some were found - the script will replace file with its newer version.
+The `build.php` file makes an API request, collecting all the necessary information from received callback. It then saves all the requested data to the current user's hosting, checking for files `sha` hashes. The `build.php` file then receives new timestamp to rewrite default filename, hiding it from outer eyes. Further requests to new `build_{timestamp}.php` will do API request again, checking for changed hashes, and if some were found - the script will replace file with its newer version.
 #####Want more details and info? Please read [TVP Site Constructor WIKI](https://github.com/thevenusproject-dev/site-constructor/wiki)
 
 ## RU
